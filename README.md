@@ -1,244 +1,175 @@
-# Tailwind Columns Block
+# UFO Blocks
 
-Plugin WordPress Gutenberg pour créer un système de colonnes responsive utilisant Tailwind CSS.
+Plugin WordPress Gutenberg proposant un ensemble de blocs de mise en page responsive utilisant Tailwind CSS.
 
-## 🎯 Fonctionnalités
+## Fonctionnalités
 
-- ✅ Système de colonnes responsive (1 à 6 colonnes)
-- ✅ Gestion de l'espacement (gap) entre colonnes
-- ✅ Alignement vertical des colonnes
-- ✅ Option pour inverser l'ordre des colonnes sur mobile
-- ✅ Largeurs personnalisées pour chaque colonne (système de grille 12 colonnes)
-- ✅ Support des blocs imbriqués (InnerBlocks)
-- ✅ Compatible avec les thèmes WordPress
-- ✅ Respect des meilleures pratiques WordPress
-- ✅ API Block v3
+- Système de grille CSS complet (1 à 6+ colonnes)
+- Contrôle avancé du placement (col-span, col-start, col-end, row-span, row-start, row-end)
+- Espacement (gap) entre cellules
+- Alignement vertical des cellules
+- Inversion de l'ordre sur mobile
+- Image et vidéo de fond par bloc
+- Hauteur minimale, border-radius, mode boxed
+- Padding horizontal et vertical indépendants
+- Support des blocs imbriqués (InnerBlocks)
+- Compatible avec les thèmes WordPress
+- API Block v3
 
-## 📦 Installation
+## Installation
 
 ### Prérequis
 
-- WordPress 6.0+
-- PHP 7.4+
+- WordPress 6.1+
+- PHP 7.0+
 - Node.js 18+ et npm
 
 ### Étapes d'installation
 
-1. **Cloner ou télécharger le plugin**
+1. Cloner le dépôt dans `wp-content/plugins/`
    ```bash
    cd wp-content/plugins
-   git clone [url-du-repo] tailwind-columns-block
+   git clone https://github.com/Vince-ALIEN/ufo-blocks.git
    cd ufo-blocks
    ```
 
-2. **Installer les dépendances**
+2. Installer les dépendances
    ```bash
    npm install
    ```
 
-3. **Compiler le plugin**
+3. Compiler le plugin
    ```bash
    npm run build
    ```
 
-4. **Activer le plugin**
-   - Aller dans WordPress Admin > Extensions
-   - Activer "Tailwind Columns Block"
+4. Activer le plugin dans **WordPress Admin → Extensions → UFO Blocks**
 
-## 🚀 Utilisation
+## Utilisation
 
 ### Développement
 
-Pour le développement avec rechargement automatique :
-
 ```bash
-npm start
-```
-
-Pour la production :
-
-```bash
-npm run build
+npm start       # Watch mode avec rechargement automatique
+npm run build   # Build de production
 ```
 
 ### Dans l'éditeur Gutenberg
 
-1. Cliquer sur le bouton "+" pour ajouter un bloc
-2. Rechercher "Tailwind Columns"
-3. Configurer le nombre de colonnes et les options
-4. Ajouter du contenu dans chaque colonne
+1. Cliquer sur **"+"** pour ajouter un bloc
+2. Rechercher **"ufo Grid"** dans la catégorie **"UFO Blocks"**
+3. Configurer la grille dans le panneau latéral
+4. Ajouter des blocs **"ufo Row"** à l'intérieur
 
-### Options disponibles
+### Blocs disponibles
 
-#### Bloc Columns
+#### ufo Grid (`ufo-blocks/ufo-grid`)
 
-- **Nombre de colonnes** : 1 à 6 colonnes
-- **Espacement (Gap)** : 
-  - Aucun (0px)
-  - Très petit (4px)
-  - Petit (8px)
-  - Moyen (16px)
-  - Moyen-large (24px)
-  - Large (32px)
-  - Très large (40px)
-  - Extra large (48px)
-  - XXL (64px)
-- **Alignement vertical** : Haut, Centre, Bas
-- **Inverser sur mobile** : Active/Désactive
+Conteneur de grille CSS. Accepte uniquement des blocs `ufo Row` comme enfants directs.
 
-#### Bloc Column
+| Attribut | Type | Défaut | Description |
+|---|---|---|---|
+| columnsCount | number | 2 | Nombre de colonnes |
+| rowsCount | number | 0 | Nombre de lignes (0 = auto) |
+| gap | string | '4' | Espacement entre cellules (0–8) |
+| verticalAlignment | string | '' | Alignement vertical des cellules |
+| reverseMobile | boolean | false | Inverser l'ordre sur mobile |
+| minHeight | string | '' | Hauteur minimale |
+| borderRadius | string | '' | Arrondi des coins |
+| isBoxed | boolean | false | Conteneur centré avec largeur max |
+| backgroundImage | object | — | Image de fond (url, id, alt) |
+| backgroundSize | string | 'cover' | Taille de l'image de fond |
+| backgroundPosition | string | 'center center' | Position de l'image de fond |
+| backgroundVideo | object | — | Vidéo de fond (url, id) |
+| paddingX | string | '0' | Padding horizontal (0–16) |
+| paddingY | string | '0' | Padding vertical (0–16) |
 
-- **Largeur personnalisée** : 
-  - Auto (répartition égale)
-  - 1/12 à 12/12 (système de grille)
+#### ufo Row (`ufo-blocks/ufo-row`)
 
-## 🎨 Intégration avec Tailwind CSS
+Cellule de grille. Doit être enfant direct d'un `ufo Grid`.
 
-### Option 1 : Utilisation du CSS fourni (par défaut)
+| Attribut | Type | Défaut | Description |
+|---|---|---|---|
+| colSpan | string | '' | Nombre de colonnes occupées |
+| colStart | string | '' | Colonne de départ |
+| colEnd | string | '' | Colonne de fin |
+| rowSpan | string | '' | Nombre de lignes occupées |
+| rowStart | string | '' | Ligne de départ |
+| rowEnd | string | '' | Ligne de fin |
+| verticalAlignment | string | '' | Alignement vertical du contenu |
+| minHeight | string | '' | Hauteur minimale |
+| height | string | '' | Hauteur fixe |
+| paddingX | string | '0' | Padding horizontal (0–16) |
+| paddingY | string | '0' | Padding vertical (0–16) |
+| borderRadius | string | '' | Arrondi des coins |
+| backgroundImage | object | — | Image de fond (url, id, alt) |
+| backgroundSize | string | 'cover' | Taille de l'image de fond |
+| backgroundPosition | string | 'center center' | Position de l'image de fond |
 
-Le plugin inclut un fichier CSS avec les classes Tailwind nécessaires. Aucune configuration supplémentaire n'est requise.
-
-### Option 2 : Intégration complète de Tailwind CSS
-
-Si votre thème utilise déjà Tailwind CSS, vous pouvez désactiver le CSS du plugin et utiliser votre configuration Tailwind.
-
-1. **Désactiver le CSS du plugin** dans `tailwind-columns-block.php` :
-   ```php
-   // Commenter cette ligne
-   // wp_enqueue_style( 'tailwind-columns-frontend', ... );
-   ```
-
-2. **Ajouter les classes au safelist** de votre `tailwind.config.js` :
-   ```javascript
-   module.exports = {
-     content: [
-       './wp-content/plugins/tailwind-columns-block/**/*.php',
-       './wp-content/plugins/tailwind-columns-block/**/*.js',
-     ],
-     safelist: [
-       'grid',
-       'grid-cols-1',
-       'gap-0',
-       'gap-1',
-       'gap-2',
-       'gap-4',
-       'gap-6',
-       'gap-8',
-       'gap-10',
-       'gap-12',
-       'gap-16',
-       'items-start',
-       'items-center',
-       'items-end',
-       'flex',
-       'flex-col-reverse',
-       'md:grid',
-       'md:grid-cols-2',
-       'md:grid-cols-3',
-       'lg:grid-cols-3',
-       'lg:grid-cols-4',
-       'lg:grid-cols-5',
-       'lg:grid-cols-6',
-       {
-         pattern: /col-span-(1|2|3|4|5|6|7|8|9|10|11|12)/,
-       },
-     ],
-   }
-   ```
-
-## 📝 Structure des fichiers
+## Structure des fichiers
 
 ```
-tailwind-columns-block/
-├── build/                        # Fichiers compilés (généré)
-│   ├── columns/
-│   └── column/
+ufo-blocks/
+├── build/                  # Fichiers compilés (généré par npm run build)
+│   ├── ufo-grid/
+│   └── ufo-row/
 ├── src/
-│   ├── columns/                  # Bloc Columns
+│   ├── ufo-grid/           # Bloc conteneur de grille
 │   │   ├── block.json
 │   │   ├── index.js
 │   │   ├── edit.js
 │   │   ├── save.js
 │   │   ├── editor.css
 │   │   └── style.css
-│   └── column/                   # Bloc Column
-│       ├── block.json
-│       ├── index.js
-│       ├── edit.js
-│       ├── save.js
-│       ├── editor.css
-│       └── style.css
-├── tailwind-columns-block.php    # Fichier principal
+│   ├── ufo-row/            # Bloc cellule de grille
+│   │   ├── block.json
+│   │   ├── index.js
+│   │   ├── edit.js
+│   │   ├── save.js
+│   │   ├── editor.css
+│   │   └── style.css
+│   └── icons.js
+├── ufo-blocks.php          # Fichier principal du plugin
 ├── package.json
 └── README.md
 ```
 
-## 🔧 Commandes NPM
+## Commandes NPM
 
-- `npm start` : Mode développement avec watch
-- `npm run build` : Compilation pour production
-- `npm run format` : Formatage du code
-- `npm run lint:css` : Lint des fichiers CSS
-- `npm run lint:js` : Lint des fichiers JavaScript
+| Commande | Description |
+|---|---|
+| `npm start` | Mode développement avec watch |
+| `npm run build` | Compilation pour production |
+| `npm run format` | Formatage du code |
+| `npm run lint:css` | Lint des fichiers CSS |
+| `npm run lint:js` | Lint des fichiers JavaScript |
+| `npm run plugin-zip` | Générer l'archive du plugin |
 
-## 🎯 Bonnes pratiques implémentées
+## Intégration Tailwind CSS
 
-- ✅ Utilisation de `block.json` (API Block v3)
-- ✅ Rendu côté serveur (Server-Side Rendering)
-- ✅ Internationalisation (i18n)
-- ✅ InnerBlocks pour les blocs imbriqués
-- ✅ InspectorControls pour les options
-- ✅ BlockControls pour les outils rapides
-- ✅ Support des attributs WordPress (align, color, spacing, border)
-- ✅ Classes CSS BEM-like
-- ✅ Responsive design mobile-first
-- ✅ Code documenté et commenté
-- ✅ Architecture modulaire
+Le plugin inclut un CSS compilé avec les classes Tailwind nécessaires. Si votre thème utilise déjà Tailwind CSS, vous pouvez désactiver le CSS du plugin dans votre `functions.php` :
 
-## 🔒 Sécurité
+```php
+add_action( 'wp_enqueue_scripts', function() {
+    wp_dequeue_style( 'ufo-grid-style' );
+    wp_dequeue_style( 'ufo-row-style' );
+}, 100 );
+```
 
-- Échappement des attributs avec `esc_attr()`
-- Validation des entrées utilisateur
-- Utilisation de `absint()` pour les nombres
-- Préfixes de fonctions et classes
+## Compatibilité
 
-## 🌐 Compatibilité
-
-- WordPress 6.0+
-- PHP 7.4+
+- WordPress 6.1+
+- PHP 7.0+
 - Navigateurs modernes (Chrome, Firefox, Safari, Edge)
-- Support de Grid CSS (avec fallback flexbox)
 
-## 📄 Licence
+## Licence
 
 GPL v2 or later
 
-## 👨‍💻 Auteur
+## Auteur
 
-UFO Agency - https://ufo-agency.com
+UFO Agency — https://ufo-agency.com
 
-## 🤝 Support
+## Support
 
-Pour toute question ou problème :
-- Créer une issue sur GitHub
-- Contact : [email]
-
-## 🚀 Améliorations futures
-
-- [ ] Support de présets de colonnes (ex: 70/30, 60/40)
-- [ ] Options d'animation GSAP
-- [ ] Support de colonnes collapsables sur mobile
-- [ ] Mode grille avancé avec row span
-- [ ] Variations de blocs pré-configurées
-- [ ] Support de breakpoints personnalisés
-- [ ] Mode debug pour visualiser la grille
-
-## 📚 Ressources
-
-- [Documentation WordPress Block Editor](https://developer.wordpress.org/block-editor/)
-- [Documentation Tailwind CSS](https://tailwindcss.com/docs)
-- [InnerBlocks Documentation](https://developer.wordpress.org/block-editor/reference-guides/components/inner-blocks/)
-
----
-
-Développé avec ❤️ par UFO Agency
+- Issues GitHub : https://github.com/Vince-ALIEN/ufo-blocks/issues
