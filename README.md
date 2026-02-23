@@ -28,7 +28,7 @@ Plugin WordPress Gutenberg pour créer un système de colonnes responsive utilis
    ```bash
    cd wp-content/plugins
    git clone [url-du-repo] tailwind-columns-block
-   cd ufo-block
+   cd ufo-blocks
    ```
 
 2. **Installer les dépendances**
