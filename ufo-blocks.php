@@ -54,8 +54,13 @@ add_filter('block_categories_all', 'ufo_blocks_register_category', 10, 2);
  * Ajoutez ce code dans votre fichier PHP principal (ufo-blocks.php)
  */
 function ufo_blocks_register_faq_scripts() {
-    // Maintenant que le fichier asset.php est généré, on peut l'utiliser
-    $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/ufo-faq-frontend.asset.php' );
+    $asset_path = plugin_dir_path( __FILE__ ) . 'build/ufo-faq-frontend.asset.php';
+
+    if ( ! file_exists( $asset_path ) ) {
+        return;
+    }
+
+    $asset_file = include( $asset_path );
 
     wp_register_script(
         'ufo-faq-frontend',
