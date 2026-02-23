@@ -1,0 +1,18 @@
+/**
+ * Styles frontend pour le bloc Column
+ */
+
+.ufo-row {
+    box-sizing: border-box;
+}
+
+.ufo-row > * {
+    box-sizing: border-box;
+}
+
+/* Support pour les anciennes versions de navigateurs */
+@supports not (display: grid) {
+    .ufo-row {
+        flex: 1 1 auto;
+    }
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ufo-blocks/ufo-row",
+  "version": "1.0.0",
+  "title": "ufo Row",
+  "category": "ufo-blocks",
+  "icon": "PanelLeftDashed",
+  "description": "Élément de grille pour le système ufo Grid",
+  "parent": ["ufo-blocks/ufo-grid"],
+  "keywords": ["row", "column", "layout", "ufo"],
+  "textdomain": "ufo-blocks",
+  "attributes": {
+    "colSpan": {
+      "type": "string",
+      "default": ""
+    },
+    "colStart": {
+      "type": "string",
+      "default": ""
+    },
+    "colEnd": {
+      "type": "string",
+      "default": ""
+    },
+    "rowSpan": {
+      "type": "string",
+      "default": ""
+    },
+    "rowStart": {
+      "type": "string",
+      "default": ""
+    },
+    "rowEnd": {
+      "type": "string",
+      "default": ""
+    },
+    "verticalAlignment": {
+      "type": "string",
+      "default": ""
+    },
+    "minHeight": {
+      "type": "string",
+      "default": ""
+    },
+    "height": {
+      "type": "string",
+      "default": ""
+    },
+    "paddingY": {
+      "type": "string",
+      "default": "0",
+      "enum": ["0", "2", "4", "6", "8", "10", "12", "14", "16"]
+    },
+    "paddingX": {
+      "type": "string",
+      "default": "0",
+      "enum": ["0", "2", "4", "6", "8", "10", "12", "14", "16"]
+    },
+    "borderRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundImage": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "id": null,
+        "alt": ""
+      }
+    },
+    "backgroundSize": {
+      "type": "string",
+      "default": "cover"
+    },
+    "backgroundPosition": {
+      "type": "string",
+      "default": "center center"
+    }
+  },
+  "supports": {
+    "html": false,
+    "color": {
+      "gradients": true,
+      "background": true,
+      "text": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "anchor": true
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,95 @@
+/**
+ * Styles pour l'éditeur du bloc ufo-row
+ * Accessibilité : contraste amélioré, focus visible, support forced-colors
+ */
+
+.ufo-row {
+  position: relative;
+  min-height: 50px;
+  padding: 8px;
+}
+
+.ufo-row::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, border-width 0.2s ease;
+}
+
+.ufo-row:hover::before {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Focus visible pour navigation clavier */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"]:focus-within .ufo-row::before,
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"].is-selected .ufo-row::before {
+  opacity: 0.5;
+  border-color: #B34F94;
+}
+
+/* Indicateur visuel pour les colonnes vides */
+.ufo-row:empty::after {
+  content: '+';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 24px;
+  font-weight: 300;
+}
+
+/* Espacement pour l'édition */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"] {
+  margin: 0;
+}
+
+/* Border radius du focus outline */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"]:not([contenteditable=true]):focus:after {
+  border-radius: 10px;
+}
+
+/* État de sélection du bloc */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"].is-selected > .block-editor-block-list__block-edit > [data-block] > .ufo-row::before {
+  border-color: rgba(0, 0, 0, 0.4);
+  border-width: 2px;
+  border-style: solid;
+}
+
+/* État de survol dans la sidebar */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"].is-hovered > .block-editor-block-list__block-edit > [data-block] > .ufo-row::before {
+  border-color: rgba(0, 0, 0, 0.3);
+  border-style: solid;
+}
+
+/* Support du mode contraste élevé (Windows, etc.) */
+@media (forced-colors: active) {
+  .ufo-row::before {
+    border-color: CanvasText;
+    opacity: 1;
+  }
+
+  .block-editor-block-list__block[data-type="ufo-blocks/ufo-row"]:focus-within .ufo-row::before,
+  .block-editor-block-list__block[data-type="ufo-blocks/ufo-row"].is-selected .ufo-row::before {
+    border-color: Highlight;
+  }
+
+  .ufo-row:empty::after {
+    color: CanvasText;
+    opacity: 1;
+  }
+}
+
+/* Respect de la préférence de réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .ufo-row::before {
+    transition: none;
+  }
+}

@@ -1,0 +1,94 @@
+/**
+ * Styles pour l'éditeur du bloc ufo-grid
+ * Accessibilité : contraste amélioré, focus visible, support forced-colors
+ */
+
+.ufo-grid-wrapper {
+  position: relative;
+  min-height: 100px;
+  padding: 12px;
+}
+
+.ufo-grid-wrapper::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  transition: border-color 0.2s ease;
+}
+
+.ufo-grid-wrapper:hover::before {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.ufo-grid-wrapper:empty::after {
+  content: 'Colonnes';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Focus visible pour navigation clavier */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-grid"]:focus-within .ufo-grid-wrapper::before,
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-grid"].is-selected .ufo-grid-wrapper::before {
+  opacity: 0.5;
+  border-color: #B34F94;
+}
+
+/* Indicateur visuel dans l'éditeur */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-grid"] {
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
+
+/* Espacement pour l'édition */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-grid"] .block-editor-inner-blocks {
+  margin: 0;
+}
+
+/* Assure que les colonnes s'affichent correctement dans l'éditeur */
+.editor-styles-wrapper .ufo-grid-wrapper {
+  display: grid !important;
+  gap: 16px;
+}
+
+/* État de sélection du bloc */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-grid"].is-selected > .block-editor-block-list__block-edit > [data-block] > .ufo-grid-wrapper::before {
+  border-color: rgba(0, 0, 0, 0.3);
+  border-width: 2px;
+}
+
+/* État de survol dans la sidebar */
+.block-editor-block-list__block[data-type="ufo-blocks/ufo-grid"].is-hovered > .block-editor-block-list__block-edit > [data-block] > .ufo-grid-wrapper::before {
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Support du mode contraste élevé (Windows, etc.) */
+@media (forced-colors: active) {
+  .ufo-grid-wrapper::before {
+    border-color: CanvasText;
+    opacity: 1;
+  }
+
+  .block-editor-block-list__block[data-type="ufo-blocks/ufo-grid"]:focus-within .ufo-grid-wrapper::before,
+  .block-editor-block-list__block[data-type="ufo-blocks/ufo-grid"].is-selected .ufo-grid-wrapper::before {
+    border-color: Highlight;
+  }
+}
+
+/* Respect de la préférence de réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .ufo-grid-wrapper::before {
+    transition: none;
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ufo-blocks/ufo-grid",
+  "version": "1.0.0",
+  "title": "ufo Grid",
+  "category": "ufo-blocks",
+  "icon": "LayoutDashboard",
+  "description": "Système de grille responsive utilisant Tailwind CSS",
+  "allowedBlocks": ["ufo-blocks/ufo-row", "ufo-blocks/ufo-figure"],
+  "keywords": ["grid", "layout", "columns", "tailwind", "ufo"],
+  "textdomain": "ufo-blocks",
+  "attributes": {
+    "columnsCount": {
+      "type": "number",
+      "default": 2
+    },
+    "rowsCount": {
+      "type": "number",
+      "default": 0
+    },
+    "gap": {
+      "type": "string",
+      "default": "4",
+      "enum": ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    },
+    "verticalAlignment": {
+      "type": "string"
+    },
+    "reverseMobile": {
+      "type": "boolean",
+      "default": false
+    },
+    "minHeight": {
+      "type": "string",
+      "default": ""
+    },
+    "borderRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "isBoxed": {
+      "type": "boolean",
+      "default": false
+    },
+    "backgroundImage": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "id": null,
+        "alt": ""
+      }
+    },
+    "backgroundSize": {
+      "type": "string",
+      "default": "cover"
+    },
+    "backgroundPosition": {
+      "type": "string",
+      "default": "center center"
+    },
+    "backgroundVideo": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "id": null
+      }
+    },
+    "paddingX": {
+      "type": "string",
+      "default": "0",
+      "enum": ["0", "2", "4", "6", "8", "10", "12", "14", "16"]
+    },
+    "paddingY": {
+      "type": "string",
+      "default": "0",
+      "enum": ["0", "2", "4", "6", "8", "10", "12", "14", "16"]
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false,
+    "color": {
+      "gradients": true,
+      "background": true,
+      "text": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "anchor": true
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

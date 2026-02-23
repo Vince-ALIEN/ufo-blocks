@@ -1,0 +1,10 @@
+{
+    "extends": [
+        "plugin:@wordpress/eslint-plugin/recommended"
+    ],
+    "rules": {
+        "no-console": "warn",
+        "import/no-extraneous-dependencies": "off",
+        "@wordpress/no-unsafe-wp-apis": "warn"
+    }
+}
