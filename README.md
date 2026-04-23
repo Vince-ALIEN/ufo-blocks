@@ -147,14 +147,13 @@ ufo-blocks/
 
 ## Intégration Tailwind CSS
 
-Le plugin inclut un CSS compilé avec les classes Tailwind nécessaires. Si votre thème utilise déjà Tailwind CSS, vous pouvez désactiver le CSS du plugin dans votre `functions.php` :
+Le plugin n'inclut pas de CSS, il faut impérativement travailler avec un theme intégrant Tailwind css V4 :
 
-```php
-add_action( 'wp_enqueue_scripts', function() {
-    wp_dequeue_style( 'ufo-grid-style' );
-    wp_dequeue_style( 'ufo-row-style' );
-}, 100 );
-```
+/**
+ * On pointe Tailwind vers les fichiers source du plugin
+ * pour qu'il scanne et inclue toutes leurs classes dans le build du thème.
+ */
+@source "../../../plugins/ufo-blocks/src/**/*.js";
 
 ## Compatibilité
 
