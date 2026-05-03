@@ -1,127 +1,175 @@
 # UFO Blocks
 
-Plugin WordPress Gutenberg proposant un ensemble de blocs de mise en page responsive utilisant Tailwind CSS.
+**A WordPress Gutenberg plugin providing a powerful CSS Grid layout system built with Tailwind CSS v4.**
 
-## Fonctionnalités
+No page builder. No bloat. Just clean, semantic markup with full CSS Grid control — directly inside the block editor.
 
-- Système de grille CSS complet (1 à 6+ colonnes)
-- Contrôle avancé du placement (col-span, col-start, col-end, row-span, row-start, row-end)
-- Espacement (gap) entre cellules
-- Alignement vertical des cellules
-- Inversion de l'ordre sur mobile
-- Image et vidéo de fond par bloc
-- Hauteur minimale, border-radius, mode boxed
-- Padding horizontal et vertical indépendants
-- Support des blocs imbriqués (InnerBlocks)
-- Compatible avec les thèmes WordPress
-- API Block v3
+> Built and battle-tested by [UFO Agency](https://ufo-agency.com) across 30+ client sites.
 
-## Installation
+---
 
-### Prérequis
+## Why ufo-blocks?
+
+Gutenberg's native columns block is limited. Page builders are overkill. `ufo-blocks` gives you a proper CSS Grid system — with `col-span`, `col-start`, `row-span`, background images, background videos, responsive reordering, and more — all configurable from the block sidebar without writing a single line of CSS.
+
+It pairs with your Tailwind CSS v4 theme: the plugin ships no CSS of its own, staying lean and letting your theme's design tokens drive the visual output.
+
+---
+
+## Features
+
+- Full CSS Grid system (1 to 6+ columns)
+- Advanced placement control (`col-span`, `col-start`, `col-end`, `row-span`, `row-start`, `row-end`)
+- Gap control between cells
+- Vertical alignment per block
+- Mobile order reversal
+- Background image and video per block
+- Min-height, border-radius, boxed mode
+- Independent horizontal and vertical padding
+- Nested blocks support via `InnerBlocks`
+- Compatible with any WordPress block theme
+- Block API v3
+
+---
+
+## Requirements
 
 - WordPress 6.1+
 - PHP 7.0+
-- Node.js 18+ et npm
+- Node.js 18+ and npm
+- **A theme using Tailwind CSS v4** (see [Tailwind integration](#tailwind-css-v4-integration) below)
 
-### Étapes d'installation
+---
 
-1. Cloner le dépôt dans `wp-content/plugins/`
-   ```bash
-   cd wp-content/plugins
-   git clone https://github.com/Vince-ALIEN/ufo-blocks.git
-   cd ufo-blocks
-   ```
+## Installation
 
-2. Installer les dépendances
-   ```bash
-   npm install
-   ```
-
-3. Compiler le plugin
-   ```bash
-   npm run build
-   ```
-
-4. Activer le plugin dans **WordPress Admin → Extensions → UFO Blocks**
-
-## Utilisation
-
-### Développement
+1. Clone the repository into `wp-content/plugins/`
 
 ```bash
-npm start       # Watch mode avec rechargement automatique
-npm run build   # Build de production
+cd wp-content/plugins
+git clone https://github.com/Vince-ALIEN/ufo-blocks.git
+cd ufo-blocks
 ```
 
-### Dans l'éditeur Gutenberg
+2. Install dependencies
 
-1. Cliquer sur **"+"** pour ajouter un bloc
-2. Rechercher **"ufo Grid"** dans la catégorie **"UFO Blocks"**
-3. Configurer la grille dans le panneau latéral
-4. Ajouter des blocs **"ufo Row"** à l'intérieur
+```bash
+npm install
+```
 
-### Blocs disponibles
+3. Build the plugin
 
-#### ufo Grid (`ufo-blocks/ufo-grid`)
+```bash
+npm run build
+```
 
-Conteneur de grille CSS. Accepte uniquement des blocs `ufo Row` comme enfants directs.
+4. Activate the plugin in **WordPress Admin → Plugins → UFO Blocks**
 
-| Attribut | Type | Défaut | Description |
+---
+
+## Tailwind CSS v4 Integration
+
+`ufo-blocks` ships no CSS. It is designed to work with a theme that already runs Tailwind CSS v4. To include the plugin's block classes in your theme's Tailwind build, add the following `@source` directive to your theme's CSS entry point:
+
+```css
+@import "tailwindcss";
+
+/* Point Tailwind at ufo-blocks source files */
+@source "../../../plugins/ufo-blocks/src/**/*.js";
+
+/* Your theme's own source files */
+@source "../../templates/**/*.html";
+@source "../../parts/**/*.html";
+@source "../../patterns/**/*.php";
+```
+
+This ensures Tailwind scans the plugin's JS files and includes all necessary utility classes in the final build.
+
+Looking for a starter theme setup? Check out [Tailpress](https://github.com/richaber/tailpress) or [_TW](https://underscoretw.com/) — both handle the Tailwind + Gutenberg wiring out of the box.
+
+---
+
+## Usage
+
+### In the block editor
+
+1. Click **"+"** to add a block
+2. Search for **"ufo Grid"** under the **"UFO Blocks"** category
+3. Configure the grid from the sidebar panel
+4. Add **"ufo Row"** blocks inside the grid
+
+### Development
+
+```bash
+npm start       # Watch mode with auto-reload
+npm run build   # Production build
+```
+
+---
+
+## Blocks
+
+### ufo Grid — `ufo-blocks/ufo-grid`
+
+The CSS Grid container. Only accepts `ufo Row` blocks as direct children.
+
+| Attribute | Type | Default | Description |
 |---|---|---|---|
-| columnsCount | number | 2 | Nombre de colonnes |
-| rowsCount | number | 0 | Nombre de lignes (0 = auto) |
-| gap | string | '4' | Espacement entre cellules (0–8) |
-| verticalAlignment | string | '' | Alignement vertical des cellules |
-| reverseMobile | boolean | false | Inverser l'ordre sur mobile |
-| minHeight | string | '' | Hauteur minimale |
-| borderRadius | string | '' | Arrondi des coins |
-| isBoxed | boolean | false | Conteneur centré avec largeur max |
-| backgroundImage | object | — | Image de fond (url, id, alt) |
-| backgroundSize | string | 'cover' | Taille de l'image de fond |
-| backgroundPosition | string | 'center center' | Position de l'image de fond |
-| backgroundVideo | object | — | Vidéo de fond (url, id) |
-| paddingX | string | '0' | Padding horizontal (0–16) |
-| paddingY | string | '0' | Padding vertical (0–16) |
+| `columnsCount` | number | `2` | Number of columns |
+| `rowsCount` | number | `0` | Number of rows (0 = auto) |
+| `gap` | string | `'4'` | Gap between cells (0–8) |
+| `verticalAlignment` | string | `''` | Vertical alignment of cells |
+| `reverseMobile` | boolean | `false` | Reverse order on mobile |
+| `minHeight` | string | `''` | Minimum height |
+| `borderRadius` | string | `''` | Border radius |
+| `isBoxed` | boolean | `false` | Centered container with max-width |
+| `backgroundImage` | object | — | Background image (url, id, alt) |
+| `backgroundSize` | string | `'cover'` | Background image size |
+| `backgroundPosition` | string | `'center center'` | Background image position |
+| `backgroundVideo` | object | — | Background video (url, id) |
+| `paddingX` | string | `'0'` | Horizontal padding (0–16) |
+| `paddingY` | string | `'0'` | Vertical padding (0–16) |
 
-#### ufo Row (`ufo-blocks/ufo-row`)
+### ufo Row — `ufo-blocks/ufo-row`
 
-Cellule de grille. Doit être enfant direct d'un `ufo Grid`.
+A grid cell. Must be a direct child of `ufo Grid`.
 
-| Attribut | Type | Défaut | Description |
+| Attribute | Type | Default | Description |
 |---|---|---|---|
-| colSpan | string | '' | Nombre de colonnes occupées |
-| colStart | string | '' | Colonne de départ |
-| colEnd | string | '' | Colonne de fin |
-| rowSpan | string | '' | Nombre de lignes occupées |
-| rowStart | string | '' | Ligne de départ |
-| rowEnd | string | '' | Ligne de fin |
-| verticalAlignment | string | '' | Alignement vertical du contenu |
-| minHeight | string | '' | Hauteur minimale |
-| height | string | '' | Hauteur fixe |
-| paddingX | string | '0' | Padding horizontal (0–16) |
-| paddingY | string | '0' | Padding vertical (0–16) |
-| borderRadius | string | '' | Arrondi des coins |
-| backgroundImage | object | — | Image de fond (url, id, alt) |
-| backgroundSize | string | 'cover' | Taille de l'image de fond |
-| backgroundPosition | string | 'center center' | Position de l'image de fond |
+| `colSpan` | string | `''` | Number of columns spanned |
+| `colStart` | string | `''` | Starting column |
+| `colEnd` | string | `''` | Ending column |
+| `rowSpan` | string | `''` | Number of rows spanned |
+| `rowStart` | string | `''` | Starting row |
+| `rowEnd` | string | `''` | Ending row |
+| `verticalAlignment` | string | `''` | Vertical alignment of content |
+| `minHeight` | string | `''` | Minimum height |
+| `height` | string | `''` | Fixed height |
+| `paddingX` | string | `'0'` | Horizontal padding (0–16) |
+| `paddingY` | string | `'0'` | Vertical padding (0–16) |
+| `borderRadius` | string | `''` | Border radius |
+| `backgroundImage` | object | — | Background image (url, id, alt) |
+| `backgroundSize` | string | `'cover'` | Background image size |
+| `backgroundPosition` | string | `'center center'` | Background image position |
 
-## Structure des fichiers
+---
+
+## File Structure
 
 ```
 ufo-blocks/
-├── build/                  # Fichiers compilés (généré par npm run build)
+├── build/                  # Compiled files (generated by npm run build)
 │   ├── ufo-grid/
 │   └── ufo-row/
 ├── src/
-│   ├── ufo-grid/           # Bloc conteneur de grille
+│   ├── ufo-grid/           # Grid container block
 │   │   ├── block.json
 │   │   ├── index.js
 │   │   ├── edit.js
 │   │   ├── save.js
 │   │   ├── editor.css
 │   │   └── style.css
-│   ├── ufo-row/            # Bloc cellule de grille
+│   ├── ufo-row/            # Grid cell block
 │   │   ├── block.json
 │   │   ├── index.js
 │   │   ├── edit.js
@@ -129,46 +177,48 @@ ufo-blocks/
 │   │   ├── editor.css
 │   │   └── style.css
 │   └── icons.js
-├── ufo-blocks.php          # Fichier principal du plugin
+├── ufo-blocks.php          # Main plugin file
 ├── package.json
 └── README.md
 ```
 
-## Commandes NPM
+---
 
-| Commande | Description |
+## NPM Commands
+
+| Command | Description |
 |---|---|
-| `npm start` | Mode développement avec watch |
-| `npm run build` | Compilation pour production |
-| `npm run format` | Formatage du code |
-| `npm run lint:css` | Lint des fichiers CSS |
-| `npm run lint:js` | Lint des fichiers JavaScript |
-| `npm run plugin-zip` | Générer l'archive du plugin |
+| `npm start` | Development mode with watch |
+| `npm run build` | Production build |
+| `npm run format` | Code formatting |
+| `npm run lint:css` | CSS linting |
+| `npm run lint:js` | JavaScript linting |
+| `npm run plugin-zip` | Generate plugin archive |
 
-## Intégration Tailwind CSS
+---
 
-Le plugin n'inclut pas de CSS, il faut impérativement travailler avec un theme intégrant Tailwind css V4 :
-
-/**
- * On pointe Tailwind vers les fichiers source du plugin
- * pour qu'il scanne et inclue toutes leurs classes dans le build du thème.
- */
-@source "../../../plugins/ufo-blocks/src/**/*.js";
-
-## Compatibilité
+## Compatibility
 
 - WordPress 6.1+
 - PHP 7.0+
-- Navigateurs modernes (Chrome, Firefox, Safari, Edge)
+- Modern browsers (Chrome, Firefox, Safari, Edge)
 
-## Licence
+---
+
+## Further Reading
+
+- [How to build custom Gutenberg blocks with Tailwind CSS](https://www.ufo-agency.com/news/comment-creer-des-blocs-wordpress-gutenberg-sur-mesure-avec-tailwind-css/) *(French)*
+
+---
+
+## License
 
 GPL v2 or later
 
-## Auteur
+---
 
-UFO Agency — https://ufo-agency.com
+## Author
 
-## Support
+**UFO Agency** — [ufo-agency.com](https://ufo-agency.com)
 
-- Issues GitHub : https://github.com/Vince-ALIEN/ufo-blocks/issues
+Issues & contributions welcome → [GitHub Issues](https://github.com/Vince-ALIEN/ufo-blocks/issues)
