@@ -19,7 +19,6 @@ if (!defined("ABSPATH")) {
 }
 
 require_once plugin_dir_path(__FILE__) . 'includes/ufo-faq-schema.php';
-require_once plugin_dir_path(__FILE__) . 'includes/lcp-hero.php';
 
 // Helper SVG pour le rendu dynamique du bloc button
 if ( file_exists( __DIR__ . '/includes/ufo-blocks-icons.php' ) ) {
