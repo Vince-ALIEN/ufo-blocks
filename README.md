@@ -1,6 +1,20 @@
 # UFO Blocks
 
-Plugin WordPress Gutenberg proposant un ensemble de blocs de mise en page et de contenu responsive utilisant Tailwind CSS.
+**A WordPress Gutenberg plugin providing a powerful CSS Grid layout system and content blocks built with Tailwind CSS v4.**
+
+No page builder. No bloat. Just clean, semantic markup with full CSS Grid control — directly inside the block editor.
+
+> Built and battle-tested by [UFO Agency](https://ufo-agency.com) across 30+ client sites.
+
+---
+
+## Why ufo-blocks?
+
+Gutenberg's native columns block is limited. Page builders are overkill. `ufo-blocks` gives you a proper CSS Grid system — with `col-span`, `col-start`, `row-span`, background images, background videos, responsive reordering, and more — all configurable from the block sidebar without writing a single line of CSS.
+
+It pairs with your Tailwind CSS v4 theme: the plugin ships no CSS of its own, staying lean and letting your theme's design tokens drive the visual output.
+
+---
 
 ## Blocs disponibles
 
@@ -186,6 +200,10 @@ ufo-blocks/
 | `npm run lint:css` | Lint des fichiers CSS |
 | `npm run lint:js` | Lint des fichiers JavaScript |
 | `npm run plugin-zip` | Générer l'archive du plugin |
+
+## Pour aller plus loin
+
+- [Comment créer des blocs Gutenberg sur mesure avec Tailwind CSS](https://www.ufo-agency.com/news/comment-creer-des-blocs-wordpress-gutenberg-sur-mesure-avec-tailwind-css/)
 
 ## Compatibilité
 
