@@ -16,54 +16,55 @@ It pairs with your Tailwind CSS v4 theme: the plugin ships no CSS of its own, st
 
 ---
 
-## Blocs disponibles
+## Available blocks
 
-| Bloc | Nom technique | Description |
+| Block | Block name | Description |
 |---|---|---|
-| ufo Grid | `ufo-blocks/ufo-grid` | Conteneur de grille CSS responsive |
-| ufo Row | `ufo-blocks/ufo-row` | Cellule de grille (enfant direct de ufo Grid) |
-| UFO Button | `ufo-blocks/ufo-button` | Bouton personnalisable avec icônes Lucide |
-| ufo Buttons | `ufo-blocks/ufo-buttons-group` | Groupe de boutons avec alignement |
-| ufo FAQ | `ufo-blocks/ufo-faq` | Accordéon FAQ avec Schema.org JSON-LD |
-| ufo FAQ Item | `ufo-blocks/ufo-faq-item` | Élément question/réponse (enfant de ufo FAQ) |
-| UFO Icon | `ufo-blocks/ufo-icon` | Icône Lucide avec alignement et couleur thème |
-| UFO Time | `ufo-blocks/ufo-time` | Élément `<time>` stylisé |
-| ufo Title | `ufo-blocks/ufo-title` | Titre avec icône et fond arrondi |
+| ufo Grid | `ufo-blocks/ufo-grid` | Responsive CSS Grid container |
+| ufo Row | `ufo-blocks/ufo-row` | Grid cell (direct child of ufo Grid) |
+| UFO Button | `ufo-blocks/ufo-button` | Customizable button with Lucide icons |
+| ufo Buttons | `ufo-blocks/ufo-buttons-group` | Button group with alignment control |
+| ufo FAQ | `ufo-blocks/ufo-faq` | FAQ accordion with Schema.org JSON-LD |
+| ufo FAQ Item | `ufo-blocks/ufo-faq-item` | Question/answer item (child of ufo FAQ) |
+| UFO Icon | `ufo-blocks/ufo-icon` | Lucide icon with alignment and theme color |
+| UFO Time | `ufo-blocks/ufo-time` | Styled `<time>` element |
+| ufo Title | `ufo-blocks/ufo-title` | Title with icon and rounded background |
 
 ## Installation
 
-### Prérequis
+### Requirements
 
 - WordPress 6.1+
 - PHP 7.4+
-- Node.js 18+ et npm
+- Node.js 18+ and npm
+- **A theme using Tailwind CSS v4** (see [Tailwind integration](#tailwind-css-v4-integration) below)
 
-### Étapes d'installation
+### Steps
 
-1. Cloner le dépôt dans `wp-content/plugins/`
+1. Clone the repository into `wp-content/plugins/`
    ```bash
    cd wp-content/plugins
    git clone https://github.com/Vince-ALIEN/ufo-blocks.git
    cd ufo-blocks
    ```
 
-2. Installer les dépendances
+2. Install dependencies
    ```bash
    npm install
    ```
 
-3. Compiler le plugin
+3. Build the plugin
    ```bash
    npm run build
    ```
 
-4. Activer le plugin dans **WordPress Admin → Extensions → UFO Blocks**
+4. Activate the plugin in **WordPress Admin → Plugins → UFO Blocks**
 
-## Intégration Tailwind CSS
+## Tailwind CSS v4 Integration
 
-Le plugin ne génère pas de CSS : il faut un thème WordPress intégrant **Tailwind CSS v4**.
+`ufo-blocks` ships no CSS. It is designed to work with a theme that already runs Tailwind CSS v4.
 
-Ajouter ces directives dans le fichier CSS principal du thème pour que Tailwind scanne les sources du plugin et inclue toutes les classes utilitaires dans le build :
+Add the following directives to your theme's CSS entry point so Tailwind scans the plugin's source files and includes all required utility classes in the build:
 
 ```css
 /**
@@ -79,7 +80,7 @@ Ajouter ces directives dans le fichier CSS principal du thème pour que Tailwind
 @source inline("row-start-{1,2,3,4,5,6,7}");
 @source inline("row-end-{1,2,3,4,5,6,7,8}");
 
-/* ufo-grid — hauteur fixe */
+/* ufo-grid — fixed height */
 @source inline("h-{24,32,40,48,56,64,72,80,96,9/10}");
 
 @source inline("gap-{0,1,2,3,4,5,6,7,8}");
@@ -91,134 +92,138 @@ Ajouter ces directives dans le fichier CSS principal du thème pour que Tailwind
 @source inline("rounded-{sm,md,lg,xl,2xl,3xl}");
 ```
 
-Les `@source inline(...)` sont nécessaires pour les classes générées dynamiquement (ex. `md:col-span-3`) que Tailwind ne peut pas détecter par scan de fichiers.
+The `@source inline(...)` directives are required for dynamically generated classes (e.g. `md:col-span-3`) that Tailwind cannot detect through file scanning alone.
 
-## Utilisation
+### Starter themes
 
-### Développement
+Need a Tailwind CSS v4 + WordPress starter? Both of these handle the Tailwind + Gutenberg wiring out of the box and work seamlessly with `ufo-blocks`:
+
+- **[_tw](https://underscoretw.com/)** — A minimal `_s`-based starter theme with Tailwind CSS. Clean, unopinionated, easy to extend.
+- **[TailPress](https://tailpress.io/)** — A block-theme starter with full Tailwind CSS v4 integration, FSE support, and a ready-to-use build pipeline.
+
+## Usage
+
+### Development
 
 ```bash
-npm start       # Watch mode avec rechargement automatique
-npm run build   # Build de production
+npm start       # Watch mode with auto-reload
+npm run build   # Production build
 ```
 
-### Dans l'éditeur Gutenberg
+### In the block editor
 
-1. Cliquer sur **"+"** pour ajouter un bloc
-2. Rechercher le bloc dans la catégorie **"UFO Blocks"**
-3. Configurer via le panneau latéral
+1. Click **"+"** to add a block
+2. Search for the block under the **"UFO Blocks"** category
+3. Configure via the sidebar panel
 
-## Référence des attributs
+## Attribute reference
 
 ### ufo Grid (`ufo-blocks/ufo-grid`)
 
-Conteneur de grille CSS. Accepte uniquement des blocs `ufo Row` comme enfants directs.
+CSS Grid container. Only accepts `ufo Row` blocks as direct children.
 
-| Attribut | Type | Défaut | Description |
+| Attribute | Type | Default | Description |
 |---|---|---|---|
-| columnsCount | number | 2 | Nombre de colonnes (desktop) |
-| rowsCount | number | 0 | Nombre de lignes (0 = auto) |
-| gap | string | '4' | Espacement entre cellules (0–8) |
-| verticalAlignment | string | '' | Alignement vertical des cellules |
-| reverseMobile | boolean | false | Inverser l'ordre sur mobile |
-| equalRows | boolean | true | Lignes de hauteur égale (`auto-rows-fr`) |
-| minHeight | string | '' | Hauteur minimale |
-| borderRadius | string | '' | Arrondi des coins |
-| isBoxed | boolean | false | Conteneur centré avec largeur max |
-| backgroundImage | object | — | Image de fond (url, id, alt) |
-| backgroundSize | string | 'cover' | Taille de l'image de fond |
-| backgroundPosition | string | 'center center' | Position de l'image de fond |
-| backgroundVideo | object | — | Vidéo de fond (url, id) |
-| paddingX | string | '0' | Padding horizontal (0–16) |
-| paddingY | string | '0' | Padding vertical (0–16) |
+| columnsCount | number | 2 | Number of columns (desktop) |
+| rowsCount | number | 0 | Number of rows (0 = auto) |
+| gap | string | '4' | Gap between cells (0–8) |
+| verticalAlignment | string | '' | Vertical alignment of cells |
+| reverseMobile | boolean | false | Reverse order on mobile |
+| equalRows | boolean | true | Equal row heights (`auto-rows-fr`) |
+| minHeight | string | '' | Minimum height |
+| borderRadius | string | '' | Border radius |
+| isBoxed | boolean | false | Centered container with max-width |
+| backgroundImage | object | — | Background image (url, id, alt) |
+| backgroundSize | string | 'cover' | Background image size |
+| backgroundPosition | string | 'center center' | Background image position |
+| backgroundVideo | object | — | Background video (url, id) |
+| paddingX | string | '0' | Horizontal padding (0–16) |
+| paddingY | string | '0' | Vertical padding (0–16) |
 
 ### ufo Row (`ufo-blocks/ufo-row`)
 
-Cellule de grille. Doit être enfant direct d'un `ufo Grid`.
+Grid cell. Must be a direct child of `ufo Grid`.
 
-| Attribut | Type | Défaut | Description |
+| Attribute | Type | Default | Description |
 |---|---|---|---|
-| colSpan | string | '' | Nombre de colonnes occupées |
-| colStart | string | '' | Colonne de départ |
-| colEnd | string | '' | Colonne de fin |
-| rowSpan | string | '' | Nombre de lignes occupées |
-| rowStart | string | '' | Ligne de départ |
-| rowEnd | string | '' | Ligne de fin |
-| verticalAlignment | string | '' | Alignement vertical du contenu |
-| minHeight | string | '' | Hauteur minimale |
-| height | string | '' | Hauteur fixe |
-| paddingX | string | '0' | Padding horizontal (0–16) |
-| paddingY | string | '0' | Padding vertical (0–16) |
-| borderRadius | string | '' | Arrondi des coins |
-| backgroundImage | object | — | Image de fond (url, id, alt) |
-| backgroundSize | string | 'cover' | Taille de l'image de fond |
-| backgroundPosition | string | 'center center' | Position de l'image de fond |
+| colSpan | string | '' | Number of columns spanned |
+| colStart | string | '' | Starting column |
+| colEnd | string | '' | Ending column |
+| rowSpan | string | '' | Number of rows spanned |
+| rowStart | string | '' | Starting row |
+| rowEnd | string | '' | Ending row |
+| verticalAlignment | string | '' | Vertical alignment of content |
+| minHeight | string | '' | Minimum height |
+| height | string | '' | Fixed height |
+| paddingX | string | '0' | Horizontal padding (0–16) |
+| paddingY | string | '0' | Vertical padding (0–16) |
+| borderRadius | string | '' | Border radius |
+| backgroundImage | object | — | Background image (url, id, alt) |
+| backgroundSize | string | 'cover' | Background image size |
+| backgroundPosition | string | 'center center' | Background image position |
 
-## Structure des fichiers
+## File structure
 
 ```
 ufo-blocks/
-├── build/                    # Fichiers compilés (généré par npm run build)
+├── build/                    # Compiled files (generated by npm run build)
 ├── includes/
-│   ├── lcp-hero.php          # Optimisation LCP (fetchpriority, preload)
-│   ├── ufo-blocks-icons.php  # Helpers SVG pour le bloc button
-│   └── ufo-faq-schema.php    # JSON-LD Schema.org FAQ
+│   ├── ufo-blocks-icons.php  # SVG helpers for the button block
+│   └── ufo-faq-schema.php    # Schema.org JSON-LD for FAQ
 ├── src/
-│   ├── shared/               # Utilitaires partagés entre blocs
-│   ├── ufo-grid/             # Conteneur de grille
+│   ├── shared/               # Shared utilities across blocks
+│   ├── ufo-grid/             # Grid container block
 │   │   ├── block.json
 │   │   ├── shared.js         # getWrapperClasses(), getInnerClasses(), getWrapperStyle()
 │   │   ├── inspector.js
 │   │   ├── edit.js / save.js
 │   │   └── editor.css / style.css
-│   ├── ufo-row/              # Cellule de grille
+│   ├── ufo-row/              # Grid cell block
 │   │   ├── block.json
 │   │   ├── shared.js         # getTailwindClasses(), getBlockStyle()
 │   │   ├── inspector.js
 │   │   ├── edit.js / save.js
 │   │   └── editor.css / style.css
-│   ├── ufo-button/           # Bouton avec icône Lucide
-│   ├── ufo-buttons-group/    # Groupe de boutons
-│   ├── ufo-faq/              # FAQ accordéon + Schema.org
-│   ├── ufo-faq-item/         # Élément FAQ
-│   ├── ufo-icon/             # Icône Lucide
-│   ├── ufo-time/             # Élément <time>
-│   ├── ufo-title/            # Titre avec icône
+│   ├── ufo-button/           # Button with Lucide icon
+│   ├── ufo-buttons-group/    # Button group
+│   ├── ufo-faq/              # FAQ accordion + Schema.org
+│   ├── ufo-faq-item/         # FAQ item
+│   ├── ufo-icon/             # Lucide icon
+│   ├── ufo-time/             # <time> element
+│   ├── ufo-title/            # Title with icon
 │   └── icons.js
-├── ufo-blocks.php            # Fichier principal du plugin
+├── ufo-blocks.php            # Main plugin file
 ├── package.json
 └── webpack.config.js
 ```
 
-## Commandes NPM
+## NPM commands
 
-| Commande | Description |
+| Command | Description |
 |---|---|
-| `npm start` | Mode développement avec watch |
-| `npm run build` | Compilation pour production |
-| `npm run format` | Formatage du code |
-| `npm run lint:css` | Lint des fichiers CSS |
-| `npm run lint:js` | Lint des fichiers JavaScript |
-| `npm run plugin-zip` | Générer l'archive du plugin |
+| `npm start` | Development mode with watch |
+| `npm run build` | Production build |
+| `npm run format` | Code formatting |
+| `npm run lint:css` | CSS linting |
+| `npm run lint:js` | JavaScript linting |
+| `npm run plugin-zip` | Generate plugin archive |
 
-## Pour aller plus loin
+## Further reading
 
-- [Comment créer des blocs Gutenberg sur mesure avec Tailwind CSS](https://www.ufo-agency.com/news/comment-creer-des-blocs-wordpress-gutenberg-sur-mesure-avec-tailwind-css/)
+- [How to build custom Gutenberg blocks with Tailwind CSS](https://www.ufo-agency.com/news/comment-creer-des-blocs-wordpress-gutenberg-sur-mesure-avec-tailwind-css/) *(French)*
 
-## Compatibilité
+## Compatibility
 
 - WordPress 6.1+
 - PHP 7.4+
-- Navigateurs modernes (Chrome, Firefox, Safari, Edge)
+- Modern browsers (Chrome, Firefox, Safari, Edge)
 
-## Licence
+## License
 
 GPL v2 or later
 
-## Auteur
+## Author
 
-UFO Agency — https://ufo-agency.com
+**UFO Agency** — [ufo-agency.com](https://ufo-agency.com)
 
-## Support
-
-Issues GitHub : https://github.com/Vince-ALIEN/ufo-blocks/issues
+Issues & contributions welcome → [GitHub Issues](https://github.com/Vince-ALIEN/ufo-blocks/issues)
