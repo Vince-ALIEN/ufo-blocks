@@ -5,7 +5,7 @@
  * Description:       A set of Gutemberg blocks using Tailwind CSS in WordPress class.
  * Requires at least: 6.1
  * Requires PHP:      7.4
- * Version:           1.5.0
+ * Version:           1.5.1
  * Author:            Vincent LASSERRE
  * License:           GPL-2.0-or-later
  * License URI:       https://www.ufo-agency.com/
