@@ -5,6 +5,13 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Documentation
+- README fully translated to English
+- Added **Starter themes** section covering [_tw](https://underscoretw.com/) and [TailPress](https://tailpress.io/)
+- Removed stale reference to deleted `lcp-hero.php` from file structure
+
 ## [1.5.0] - 2026-06-23
 
 ### Ajouté
