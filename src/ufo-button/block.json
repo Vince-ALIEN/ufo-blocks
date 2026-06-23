@@ -1,0 +1,55 @@
+{
+  "apiVersion": 3,
+  "name": "ufo-blocks/ufo-button",
+  "title": "UFO Button",
+  "category": "ufo-blocks",
+  "icon": "RectangleHorizontal",
+  "description": "Un bouton personnalisable avec styles Tailwind css et icônes Lucide",
+  "parent": ["ufo-blocks/ufo-buttons-group"],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "color": {
+      "text": true,
+      "background": true,
+      "link": false,
+      "gradients": false
+    },
+    "border": {
+      "radius": true,
+      "width": true,
+      "style": true,
+      "color": true
+    }
+  },
+  "textdomain": "ufo-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "render": "file:./render.php",
+  "attributes": {
+    "buttonText": {
+      "type": "string",
+      "default": "Click me"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonIcon": {
+      "type": "string",
+      "default": ""
+    },
+    "opensInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "relNofollow": {
+      "type": "boolean",
+      "default": false
+    },
+    "iconPosition": {
+      "type": "string",
+      "default": "right"
+    }
+  }
+}

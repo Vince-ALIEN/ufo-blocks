@@ -1,0 +1,33 @@
+{
+  "apiVersion": 3,
+  "name": "ufo-blocks/ufo-faq",
+  "title": "ufo FAQ",
+  "category": "ufo-blocks",
+  "icon": "TableOfContents",
+  "description": "Un bloc FAQ avec accordéon et données structurées personnalisables pour le SEO.",
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "textdomain": "ufo-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "attributes": {
+    "enableSchema": {
+      "type": "boolean",
+      "default": true
+    },
+    "schemaName": {
+      "type": "string",
+      "default": ""
+    },
+    "schemaDescription": {
+      "type": "string",
+      "default": ""
+    },
+    "schemaAbout": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}

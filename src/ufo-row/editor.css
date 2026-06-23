@@ -1,95 +1,79 @@
-/**
- * Styles pour l'éditeur du bloc ufo-row
- * Accessibilité : contraste amélioré, focus visible, support forced-colors
- */
+/* =========================================================================
+   ufo-row — Styles d'édition Gutenberg
+   ========================================================================= */
 
-.ufo-row {
+/* -------------------------------------------------------------------------
+   4. Bloc ufo-row : cellule
+   ------------------------------------------------------------------------- */
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-row {
   position: relative;
-  min-height: 50px;
-  padding: 8px;
+  min-height: var(--ufo-row-min-height, 110px);
+  padding: 16px;
+  border: 1px dashed var(--ufo-color-row-border, rgba(0, 0, 0, 0.18));
+  border-radius: calc(var(--ufo-radius, 8px) - 2px);
+  background-color: var(--ufo-color-row-bg, rgba(0, 0, 0, 0.015));
+  transition:
+    border-color var(--ufo-transition, 120ms ease-in-out),
+    background-color var(--ufo-transition, 120ms ease-in-out),
+    box-shadow var(--ufo-transition, 120ms ease-in-out);
 }
 
-.ufo-row::before {
-  content: '';
-  display: block;
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-row:hover {
+  border-color: var(--ufo-color-row-border-hover, rgba(124, 58, 237, 0.55));
+  background-color: rgba(124, 58, 237, 0.04);
+}
+
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-row.is-selected,
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-row.has-child-selected {
+  border-style: solid;
+  border-color: var(--ufo-color-accent-strong, #7c3aed);
+  background-color: #ffffff45;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.15);
+}
+
+/* État vide */
+.editor-styles-wrapper
+  .wp-block-ufo-blocks-ufo-row:not(
+    :has(.block-editor-block-list__block)
+  )::after,
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-row.is-empty::after {
+  content: "Cellule vide — cliquez pour ajouter du contenu";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  transition: border-color 0.2s ease, border-width 0.2s ease;
-}
-
-.ufo-row:hover::before {
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-/* Focus visible pour navigation clavier */
-.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"]:focus-within .ufo-row::before,
-.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"].is-selected .ufo-row::before {
-  opacity: 0.5;
-  border-color: #B34F94;
-}
-
-/* Indicateur visuel pour les colonnes vides */
-.ufo-row:empty::after {
-  content: '+';
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 24px;
-  font-weight: 300;
+  font-size: 12px;
+  color: var(--ufo-color-text-muted, rgba(0, 0, 0, 0.55));
+  font-style: italic;
+  pointer-events: none;
 }
 
-/* Espacement pour l'édition */
-.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"] {
-  margin: 0;
+/* Badge "col-span X · row-span Y" en haut à droite à la sélection */
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-row::before {
+  content: "col-span " attr(data-col-span) " · row-span " attr(data-row-span);
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #fff;
+  background: var(--ufo-color-accent-strong, #7c3aed);
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(2px);
+  transition:
+    opacity var(--ufo-transition, 120ms ease-in-out),
+    transform var(--ufo-transition, 120ms ease-in-out);
+  pointer-events: none;
+  z-index: 2;
 }
 
-/* Border radius du focus outline */
-.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"]:not([contenteditable=true]):focus:after {
-  border-radius: 10px;
-}
-
-/* État de sélection du bloc */
-.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"].is-selected > .block-editor-block-list__block-edit > [data-block] > .ufo-row::before {
-  border-color: rgba(0, 0, 0, 0.4);
-  border-width: 2px;
-  border-style: solid;
-}
-
-/* État de survol dans la sidebar */
-.block-editor-block-list__block[data-type="ufo-blocks/ufo-row"].is-hovered > .block-editor-block-list__block-edit > [data-block] > .ufo-row::before {
-  border-color: rgba(0, 0, 0, 0.3);
-  border-style: solid;
-}
-
-/* Support du mode contraste élevé (Windows, etc.) */
-@media (forced-colors: active) {
-  .ufo-row::before {
-    border-color: CanvasText;
-    opacity: 1;
-  }
-
-  .block-editor-block-list__block[data-type="ufo-blocks/ufo-row"]:focus-within .ufo-row::before,
-  .block-editor-block-list__block[data-type="ufo-blocks/ufo-row"].is-selected .ufo-row::before {
-    border-color: Highlight;
-  }
-
-  .ufo-row:empty::after {
-    color: CanvasText;
-    opacity: 1;
-  }
-}
-
-/* Respect de la préférence de réduction de mouvement */
-@media (prefers-reduced-motion: reduce) {
-  .ufo-row::before {
-    transition: none;
-  }
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-row.is-selected::before,
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-row:hover::before {
+  opacity: 1;
+  transform: translateY(0);
 }

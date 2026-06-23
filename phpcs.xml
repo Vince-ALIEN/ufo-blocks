@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Tailwind Columns Block">
-    <description>WordPress Coding Standards pour Tailwind Columns Block</description>
+<ruleset name="UFO Blocks">
+    <description>WordPress Coding Standards pour UFO Blocks</description>
 
     <!-- Fichiers à vérifier -->
     <file>.</file>
@@ -36,8 +36,8 @@
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
             <property name="prefixes" type="array">
-                <element value="TailwindColumnsBlock"/>
-                <element value="tailwind_columns"/>
+                <element value="UfoBlocks"/>
+                <element value="ufo_"/>
             </property>
         </properties>
     </rule>
@@ -49,7 +49,7 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <property name="text_domain" type="array">
-                <element value="tailwind-columns-block"/>
+                <element value="ufo-blocks"/>
             </property>
         </properties>
     </rule>

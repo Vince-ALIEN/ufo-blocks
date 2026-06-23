@@ -1,0 +1,66 @@
+/* =========================================================================
+   ufo-faq — Styles d'édition Gutenberg
+   ========================================================================= */
+
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq {
+    position: relative;
+    padding: 12px;
+    border: 1px dashed var(--ufo-color-grid-border, rgba(124, 58, 237, 0.25));
+    border-radius: var(--ufo-radius, 8px);
+    background-color: var(--ufo-color-grid-bg, rgba(124, 58, 237, 0.04));
+    transition: border-color var(--ufo-transition, 120ms ease-in-out),
+                background-color var(--ufo-transition, 120ms ease-in-out);
+}
+
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq:hover {
+    border-color: var(--ufo-color-accent-strong, #7c3aed);
+    background-color: rgba(124, 58, 237, 0.06);
+}
+
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq.is-selected,
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq.has-child-selected {
+    border-style: solid;
+    border-color: var(--ufo-color-accent-strong, #7c3aed);
+    background-color: rgba(124, 58, 237, 0.06);
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.15);
+}
+
+/* Badge */
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq::before {
+    content: "FAQ · schema " attr(data-schema);
+    position: absolute;
+    top: -12px;
+    left: 12px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--ufo-badge-color, #fff);
+    background: var(--ufo-badge-bg, #1f2937);
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity var(--ufo-transition, 120ms ease-in-out), transform var(--ufo-transition, 120ms ease-in-out);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq.is-selected::before,
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq.has-child-selected::before,
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (forced-colors: active) {
+    .editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq {
+        border-color: CanvasText;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .editor-styles-wrapper .wp-block-ufo-blocks-ufo-faq {
+        transition: none;
+    }
+}

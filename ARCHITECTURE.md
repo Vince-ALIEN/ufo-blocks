@@ -17,6 +17,7 @@ ufo-blocks/
 │   │   ├── index.js
 │   │   ├── edit.js
 │   │   ├── save.js
+│   │   ├── shared.js           # Helpers de classes CSS (edit + save)
 │   │   ├── editor.css
 │   │   └── style.css
 │   └── ufo-row/                # Bloc cellule de grille
@@ -24,6 +25,7 @@ ufo-blocks/
 │       ├── index.js
 │       ├── edit.js
 │       ├── save.js
+│       ├── shared.js           # Helpers de classes CSS (edit + save)
 │       ├── editor.css
 │       └── style.css
 │

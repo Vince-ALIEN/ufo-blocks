@@ -1,6 +1,6 @@
 {
-    "name": "ufo-agency/tailwind-columns-block",
-    "description": "Plugin WordPress Gutenberg pour créer un système de colonnes avec Tailwind CSS",
+    "name": "ufo-agency/ufo-blocks",
+    "description": "Plugin WordPress Gutenberg de blocs personnalisés avec Tailwind CSS",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -31,7 +31,7 @@
         }
     },
     "support": {
-        "issues": "https://github.com/ufo-agency/tailwind-columns-block/issues",
-        "source": "https://github.com/ufo-agency/tailwind-columns-block"
+        "issues": "https://github.com/ufo-agency/ufo-blocks/issues",
+        "source": "https://github.com/ufo-agency/ufo-blocks"
     }
 }

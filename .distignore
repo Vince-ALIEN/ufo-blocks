@@ -1,0 +1,17 @@
+.gitignore
+.distignore
+.editorconfig
+.eslintrc.json
+.git/
+.gitattributes
+composer.json
+composer.lock
+node_modules/
+package.json
+package-lock.json
+phpcs.xml
+scripts/
+src/
+vendor/
+webpack.config.js
+*.md

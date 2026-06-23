@@ -1,0 +1,32 @@
+/* Supprime la flèche native du navigateur */
+.wp-block-ufo-blocks-ufo-faq-item > summary {
+  list-style: none;
+}
+.wp-block-ufo-blocks-ufo-faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+.wp-block-ufo-blocks-ufo-faq-item > summary::marker {
+  display: none;
+}
+
+/* Animation d'apparition du contenu à l'ouverture */
+@keyframes faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wp-block-ufo-blocks-ufo-faq-item[open] > .faq-content {
+  animation: faq-open 0.2s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wp-block-ufo-blocks-ufo-faq-item[open] > .faq-content {
+    animation: none;
+  }
+}

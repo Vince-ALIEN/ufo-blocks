@@ -1,13 +1,12 @@
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 const TerserPlugin = require("terser-webpack-plugin");
 
-// Obtenir les entrées par défaut
 const defaultEntryPoints = defaultConfig.entry();
 
 module.exports = {
   ...defaultConfig,
   entry: {
-    ...defaultEntryPoints, // Conserver les entrées par défaut
+    ...defaultEntryPoints,
   },
   optimization: {
     ...defaultConfig.optimization,
@@ -15,19 +14,19 @@ module.exports = {
       new TerserPlugin({
         terserOptions: {
           compress: {
-            drop_console: true, // Supprime les console.log en production
-            drop_debugger: true, // Supprime les debugger
-            pure_funcs: ['console.info', 'console.debug', 'console.warn'], // Supprime ces fonctions
+            drop_console: true,
+            drop_debugger: true,
+            pure_funcs: ['console.info', 'console.debug', 'console.warn'],
           },
           mangle: {
-            reserved: ['wp', 'jQuery', '$', 'React', 'ReactDOM'], // Préserve ces variables globales WordPress/React
+            reserved: ['wp', 'jQuery', '$', 'React', 'ReactDOM'],
           },
           format: {
-            comments: false, // Supprime tous les commentaires
+            comments: false,
           },
         },
-        extractComments: false, // Évite la création de fichiers .LICENSE séparés
-        parallel: true, // Utilise plusieurs processus pour accélérer la minification
+        extractComments: false,
+        parallel: true,
       }),
     ],
   },

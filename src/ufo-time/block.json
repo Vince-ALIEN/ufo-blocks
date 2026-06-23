@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ufo-blocks/ufo-time",
+  "version": "0.1.0",
+  "title": "UFO Time",
+  "category": "ufo-blocks",
+  "icon": "clock",
+  "description": "Un élément <time> stylisé avec point décoratif et séparateur.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "color": {
+      "text": true,
+      "background": true
+    },
+    "typography": {
+      "fontSize": true
+    }
+  },
+  "attributes": {
+    "datetime": {
+      "type": "string",
+      "default": "2021-08"
+    },
+    "text": {
+      "type": "string",
+      "default": "Aug 2021"
+    }
+  },
+  "textdomain": "ufo-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

@@ -1,0 +1,60 @@
+{
+  "apiVersion": 3,
+  "name": "ufo-blocks/ufo-title",
+  "title": "Ufo title",
+  "category": "ufo-blocks",
+  "icon": "heading",
+  "description": "Un titre avec icône et fond arrondi.",
+  "supports": {
+    "anchor": true,
+    "className": true,
+    "splitting": true,
+    "typography": {
+      "fontSize": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontStyle": true,
+      "__experimentalFontWeight": true,
+      "__experimentalLetterSpacing": true,
+      "__experimentalTextTransform": true,
+      "__experimentalWritingMode": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "color": {
+      "text": true,
+      "background": true
+    }
+  },
+  "attributes": {
+    "content": {
+      "type": "string",
+      "default": ""
+    },
+    "level": {
+      "type": "number",
+      "default": 3
+    },
+    "titleAlignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "textColor": {
+      "type": "string"
+    },
+    "iconBgColor": {
+      "type": "string"
+    },
+    "customIconBgColor": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "ufo-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "render": "file:./render.php"
+}

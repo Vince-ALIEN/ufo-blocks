@@ -1,0 +1,22 @@
+{
+  "apiVersion": 3,
+  "name": "ufo-blocks/ufo-faq-item",
+  "title": "ufo FAQ Item",
+  "category": "ufo-blocks",
+  "icon": "plus",
+  "description": "Élément FAQ avec question et réponse en InnerBlocks.",
+  "parent": ["ufo-blocks/ufo-faq"],
+  "supports": {
+    "html": false
+  },
+  "textdomain": "ufo-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "question": {
+      "type": "string",
+      "source": "html",
+      "selector": ".faq-question"
+    }
+  }
+}
