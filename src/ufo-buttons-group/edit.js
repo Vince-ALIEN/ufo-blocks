@@ -10,7 +10,7 @@ export default function Edit({ attributes, setAttributes }) {
 
   const blockProps = useBlockProps({ "data-align": buttonAlignment });
 
-  const containerClasses = `lg:flex lg:flex-nowrap py-2 gap-2 lg:space-y-0 space-y-2 ${
+  const containerClasses = `lg:flex lg:flex-nowrap p-4 gap-2 lg:space-y-0 space-y-2 ${
     buttonAlignment === "left"
       ? "justify-start"
       : buttonAlignment === "center"

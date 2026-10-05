@@ -5,12 +5,13 @@ export default function save({ attributes }) {
 
   const blockProps = useBlockProps.save();
 
-  const containerClasses = `lg:flex lg:flex-nowrap py-2 gap-2 lg:space-y-0 space-y-2 ${
+  // Colonne en mobile (alignement via items-*), ligne à partir de lg (via justify-*).
+  const containerClasses = `flex flex-col lg:flex-row lg:flex-nowrap lg:items-stretch p-4 gap-2 ${
     buttonAlignment === "left"
-      ? "justify-start"
+      ? "items-start lg:justify-start"
       : buttonAlignment === "center"
-      ? "justify-center"
-      : "justify-end"
+      ? "items-center lg:justify-center"
+      : "items-end lg:justify-end"
   }`;
 
   return (

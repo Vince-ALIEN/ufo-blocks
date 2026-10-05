@@ -71,6 +71,17 @@
     max-width: none !important;
 }
 
+/* Bouton pleine largeur : le conteneur InnerBlocks et le bouton s'étirent */
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-buttons-group .block-editor-inner-blocks:has(.wp-block-ufo-blocks-ufo-button.is-full-width) {
+    flex: 1 1 100%;
+    width: 100%;
+}
+
+.editor-styles-wrapper .wp-block-ufo-blocks-ufo-buttons-group .wp-block-ufo-blocks-ufo-button.is-full-width {
+    flex: 1 1 0% !important;
+    width: 100% !important;
+}
+
 .editor-styles-wrapper .wp-block-ufo-blocks-ufo-buttons-group .block-list-appender {
     flex-shrink: 0 !important;
     margin: 0 !important;

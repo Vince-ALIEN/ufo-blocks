@@ -14,6 +14,7 @@ $button_icon   = $attributes['buttonIcon']   ?? '';
 $icon_position = $attributes['iconPosition'] ?? 'right';
 $opens_new_tab = (bool) ( $attributes['opensInNewTab'] ?? false );
 $rel_nofollow  = (bool) ( $attributes['relNofollow']   ?? false );
+$is_full_width = (bool) ( $attributes['isFullWidth']   ?? false );
 
 // ── Attributs rel / target ────────────────────────────────────────────────────
 $rel_parts = [];
@@ -41,7 +42,7 @@ if ( ! empty( $button_icon ) && function_exists( 'ufo_get_icon_svg' ) ) {
 
 // ── Wrapper ───────────────────────────────────────────────────────────────────
 $wrapper_attrs = get_block_wrapper_attributes( [
-	'class' => 'btn inline-flex items-center gap-2 no-underline cursor-pointer group',
+	'class' => 'btn inline-flex items-center gap-2 no-underline cursor-pointer group' . ( $is_full_width ? ' w-full justify-center' : '' ),
 ] );
 
 ?>

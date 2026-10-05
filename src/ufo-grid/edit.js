@@ -30,7 +30,7 @@ export default function Edit({ attributes, setAttributes }) {
     { className: getInnerClasses(attributes) },
     {
       template: getTemplate(),
-      allowedBlocks: ["ufo-blocks/ufo-row"],
+      allowedBlocks: ["ufo-blocks/ufo-row" , "core/image"],
       orientation: "horizontal",
       templateLock: false,
     },

@@ -27,7 +27,7 @@
 .editor-styles-wrapper .wp-block-ufo-blocks-ufo-row.has-child-selected {
   border-style: solid;
   border-color: var(--ufo-color-accent-strong, #7c3aed);
-  background-color: #ffffff45;
+  background-color: var(--ufo-select-color-bg, rgba(124, 58, 237, 0.08));
   box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.15);
 }
 

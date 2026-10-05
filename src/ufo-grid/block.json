@@ -7,7 +7,7 @@
   "category": "ufo-blocks",
   "icon": "LayoutDashboard",
   "description": "Système de grille responsive utilisant Tailwind CSS",
-  "allowedBlocks": ["ufo-blocks/ufo-row", "ufo-blocks/ufo-figure"],
+  "allowedBlocks": ["ufo-blocks/ufo-row", "core/image"],
   "keywords": ["grid", "layout", "columns", "tailwind", "ufo"],
   "textdomain": "ufo-blocks",
   "attributes": {

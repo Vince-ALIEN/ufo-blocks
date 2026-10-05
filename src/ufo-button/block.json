@@ -50,6 +50,10 @@
     "iconPosition": {
       "type": "string",
       "default": "right"
+    },
+    "isFullWidth": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

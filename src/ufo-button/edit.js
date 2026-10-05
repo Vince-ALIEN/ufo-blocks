@@ -32,13 +32,17 @@ function Edit({ attributes, setAttributes }) {
     opensInNewTab,
     relNofollow,
     iconPosition,
+    isFullWidth,
   } = attributes;
 
   const [isLinkPopoverOpen, setIsLinkPopoverOpen] = useState(false);
   const blockProps = useBlockProps();
   const IconComponent = ICONS[buttonIcon];
 
-  const buttonClasses = "btn inline-flex items-center gap-2 no-underline group cursor-pointer";
+  const buttonClasses = clsx(
+    "btn inline-flex items-center gap-2 no-underline group cursor-pointer",
+    { "w-full justify-center is-full-width": isFullWidth }
+  );
 
   return (
     <>
@@ -139,6 +143,15 @@ function Edit({ attributes, setAttributes }) {
               <ToggleGroupControlOptionIcon value="right" icon={alignRight} label={__("Droite", "ufo-blocks")} />
             </ToggleGroupControl>
           )}
+        </PanelBody>
+
+        <PanelBody title={__("Disposition", "ufo-blocks")} initialOpen={false}>
+          <ToggleControl
+            label={__("Pleine largeur", "ufo-blocks")}
+            help={__("Le bouton occupe toute la largeur disponible (w-full)", "ufo-blocks")}
+            checked={isFullWidth}
+            onChange={(value) => setAttributes({ isFullWidth: value })}
+          />
         </PanelBody>
 
         <PanelBody title={__("Lien", "ufo-blocks")} initialOpen={false}>
