@@ -60,6 +60,18 @@ It pairs with your Tailwind CSS v4 theme: the plugin ships no CSS of its own, st
 
 4. Activate the plugin in **WordPress Admin → Plugins → UFO Blocks**
 
+### Installing from a release
+
+To deploy without building, download `ufo-blocks.zip` from the [latest release](https://github.com/Vince-ALIEN/ufo-blocks/releases/latest) and upload it in **Plugins → Add New → Upload Plugin**. Installed this way, the plugin then updates itself from GitHub releases like any other plugin (the updater stays off on a git clone, so a development checkout is never overwritten).
+
+### Publishing a release
+
+Bump the version in `ufo-blocks.php`, `package.json` and `CHANGELOG.md`, commit, then push the matching tag. The `Release` workflow builds the zip and attaches it to the GitHub release.
+
+```bash
+git tag v1.6.0 && git push origin v1.6.0
+```
+
 ## Tailwind CSS v4 Integration
 
 `ufo-blocks` ships no CSS. It is designed to work with a theme that already runs Tailwind CSS v4.

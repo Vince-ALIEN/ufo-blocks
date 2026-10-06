@@ -1,0 +1,52 @@
+# Publie une release GitHub avec le zip du plugin à chaque tag vX.Y.Z.
+# L'updater du plugin (includes/class-ufo-blocks-updater.php) installe cet
+# asset ufo-blocks.zip : build/ n'étant pas versionné, l'archive source de
+# GitHub ne serait pas installable.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
+
+      - name: Tag = version du plugin
+        run: |
+          version=$(sed -n 's/^ \* Version: *//p' ufo-blocks.php)
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::Le tag $GITHUB_REF_NAME ne correspond pas à la version $version de ufo-blocks.php"
+            exit 1
+          fi
+
+      - name: Build et zip
+        run: |
+          npm ci
+          npm run build
+          npm run plugin-zip
+
+      - name: Contrôle du zip
+        run: |
+          unzip -l ufo-blocks.zip > files.txt
+          grep -q ' ufo-blocks/ufo-blocks.php$' files.txt
+          grep -q ' ufo-blocks/includes/class-ufo-blocks-updater.php$' files.txt
+          grep -q ' ufo-blocks/build/ufo-grid/block.json$' files.txt
+
+      - name: Publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          awk '/^## \[/{n++} n==1' CHANGELOG.md | tail -n +2 > notes.md
+          gh release create "$GITHUB_REF_NAME" ufo-blocks.zip --title "$GITHUB_REF_NAME" --notes-file notes.md

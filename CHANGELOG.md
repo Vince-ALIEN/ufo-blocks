@@ -5,6 +5,16 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-10-06
+
+### Added
+- **Automatic updates from GitHub**: the `Update URI: https://github.com/Vince-ALIEN/ufo-blocks` header keeps wordpress.org out of the loop (a same-named plugin published there can no longer overwrite this one), and `includes/class-ufo-blocks-updater.php` answers WordPress' `update_plugins_github.com` filter with the latest published release and its `ufo-blocks.zip` asset. Updates show up in **Dashboard → Updates** and can be auto-updated like any plugin; "View details" shows the release notes. The lookup is cached for 6 h (1 h after an error) and bypassed by "Check again". Disabled on a git working copy so a local clone is never overwritten (filter `ufo_blocks_updater_enabled`).
+- **Release workflow** (`.github/workflows/release.yml`): on every `vX.Y.Z` tag, builds the blocks, creates `ufo-blocks.zip`, checks its content and publishes the GitHub release with the matching CHANGELOG notes.
+- `ufo-button`: "Pleine largeur" toggle (`isFullWidth`); `ufo-buttons-group` stacks buttons on mobile; `ufo-grid` accepts `core/image`.
+
+### Notes
+- Sites on 1.5.1 or earlier have no updater: update them once by hand to 1.6.0.
+
 ## [1.5.1] - 2026-06-23
 
 ### Documentation
