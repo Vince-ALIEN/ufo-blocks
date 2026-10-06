@@ -5,6 +5,11 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2026-10-06
+
+### Fixed
+- **Release workflow**: build with Node 24 to match the lockfile (npm 10 on Node 22 rejected it: "Missing: date-fns@4.4.0 from lock file"). The `v1.6.0` tag was pushed with the old workflow and has no release; 1.6.1 is the first release carrying the GitHub updater.
+
 ## [1.6.0] - 2026-10-06
 
 ### Added
