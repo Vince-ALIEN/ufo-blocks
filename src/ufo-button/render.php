@@ -15,6 +15,7 @@ $icon_position = $attributes['iconPosition'] ?? 'right';
 $opens_new_tab = (bool) ( $attributes['opensInNewTab'] ?? false );
 $rel_nofollow  = (bool) ( $attributes['relNofollow']   ?? false );
 $is_full_width = (bool) ( $attributes['isFullWidth']   ?? false );
+$sr_text       = trim( (string) ( $attributes['screenReaderText'] ?? '' ) );
 
 // ── Attributs rel / target ────────────────────────────────────────────────────
 $rel_parts = [];
@@ -28,6 +29,22 @@ if ( $rel_nofollow ) {
 $rel_attr    = ! empty( $rel_parts ) ? ' rel="' . esc_attr( implode( ' ', $rel_parts ) ) . '"' : '';
 $target_attr = $opens_new_tab ? ' target="_blank"' : '';
 $href        = ! empty( $button_url ) ? esc_url( $button_url ) : '#';
+
+// ── Texte pour lecteurs d'écran ───────────────────────────────────────────────
+// Ajouté après le libellé visible (et non en aria-label, qui le remplacerait :
+// le nom accessible doit contenir le texte affiché, WCAG 2.5.3). Les boutons
+// ouverts dans un nouvel onglet le signalent automatiquement.
+$sr_parts = [];
+if ( '' !== $sr_text ) {
+	$sr_parts[] = $sr_text;
+}
+if ( $opens_new_tab ) {
+	$sr_parts[] = __( '(nouvel onglet)', 'ufo-blocks' );
+}
+// `screen-reader-text` : classe WordPress standard, stylée par tout thème.
+$sr_html = ! empty( $sr_parts )
+	? '<span class="screen-reader-text"> ' . esc_html( implode( ' ', $sr_parts ) ) . '</span>'
+	: '';
 
 // ── Icône SVG ─────────────────────────────────────────────────────────────────
 $icon_html = '';
@@ -54,7 +71,7 @@ $wrapper_attrs = get_block_wrapper_attributes( [
 	<?php if ( 'left' === $icon_position ) : ?>
 		<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	<?php endif; ?>
-	<span><?php echo wp_kses_post( $button_text ); ?></span>
+	<span><?php echo wp_kses_post( $button_text ); ?><?php echo $sr_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped above. ?></span>
 	<?php if ( 'left' !== $icon_position ) : ?>
 		<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	<?php endif; ?>

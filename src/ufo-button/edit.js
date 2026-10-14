@@ -11,6 +11,7 @@ import {
   ToolbarGroup,
   ToolbarButton,
   ToggleControl,
+  TextControl,
   BaseControl,
   Button,
   Popover,
@@ -33,6 +34,7 @@ function Edit({ attributes, setAttributes }) {
     relNofollow,
     iconPosition,
     isFullWidth,
+    screenReaderText,
   } = attributes;
 
   const [isLinkPopoverOpen, setIsLinkPopoverOpen] = useState(false);
@@ -154,11 +156,19 @@ function Edit({ attributes, setAttributes }) {
           />
         </PanelBody>
 
-        <PanelBody title={__("Lien", "ufo-blocks")} initialOpen={false}>
+        <PanelBody title={__("Lien et accessibilité", "ufo-blocks")} initialOpen={false}>
           <ToggleControl
             label={__("Ajouter nofollow", "ufo-blocks")}
             checked={relNofollow}
             onChange={(value) => setAttributes({ relNofollow: value })}
+          />
+          <TextControl
+            label={__("Texte pour lecteurs d'écran", "ufo-blocks")}
+            help={__("Lu après le texte du bouton, invisible à l'écran. Précise un libellé vague (ex. « En savoir plus » → « sur nos horaires »). « (nouvel onglet) » est ajouté automatiquement si le lien s'ouvre dans un nouvel onglet.", "ufo-blocks")}
+            value={screenReaderText}
+            onChange={(value) => setAttributes({ screenReaderText: value })}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
           />
         </PanelBody>
       </InspectorControls>
