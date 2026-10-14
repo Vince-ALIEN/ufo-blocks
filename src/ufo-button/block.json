@@ -54,6 +54,10 @@
     "isFullWidth": {
       "type": "boolean",
       "default": false
+    },
+    "screenReaderText": {
+      "type": "string",
+      "default": ""
     }
   }
 }

@@ -5,6 +5,17 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-10-14
+
+### Added
+- `ufo-button`: "Texte pour lecteurs d'écran" field (`screenReaderText`, in the "Lien et accessibilité" panel) — read right after the visible label, hidden on screen. Clarifies vague labels ("En savoir plus" → "sur nos horaires") while keeping the visible text in the accessible name (WCAG 2.5.3), which an `aria-label` would replace.
+
+### Fixed
+- `ufo-button`: buttons opening in a new tab now announce "(nouvel onglet)" to screen readers. Rendered with WordPress' standard `screen-reader-text` class, so it doesn't depend on the theme's Tailwind setup.
+
+### Notes
+- Server-rendered block (`save()` returns `null`): the new attribute doesn't invalidate existing buttons.
+
 ## [1.6.1] - 2026-10-06
 
 ### Fixed
