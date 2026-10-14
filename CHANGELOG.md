@@ -5,6 +5,12 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- **README / Tailwind v4 integration**: the `h-*` safelist now lists every height offered by `ufo-grid` and `ufo-row` (`120` and `150` were missing, `9/10` matched no option), so those heights no longer disappear from the production CSS. `row-end-*` aligned on the 1-7 values the row inspector actually offers.
+- `ufo-grid`, `ufo-row`: "SM" border-radius label now reads 4px, the value of `rounded-sm` in Tailwind v4.
+
 ## [1.6.1] - 2026-10-06
 
 ### Fixed

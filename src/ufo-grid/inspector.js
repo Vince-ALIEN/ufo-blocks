@@ -273,7 +273,7 @@ export default function Inspector({ attributes, setAttributes }) {
             value={borderRadius}
             options={[
               { label: __("Aucun", "ufo-blocks"), value: "" },
-              { label: __("SM (2px)", "ufo-blocks"), value: "sm" },
+              { label: __("SM (4px)", "ufo-blocks"), value: "sm" },
               { label: __("MD (6px)", "ufo-blocks"), value: "md" },
               { label: __("LG (8px)", "ufo-blocks"), value: "lg" },
               { label: __("XL (12px)", "ufo-blocks"), value: "xl" },
