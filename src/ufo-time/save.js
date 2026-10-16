@@ -1,4 +1,5 @@
 import { useBlockProps } from "@wordpress/block-editor";
+import { getTimeClassName } from "./shared";
 
 export default function save({ attributes }) {
   const { datetime, text } = attributes;
@@ -7,11 +8,11 @@ export default function save({ attributes }) {
 
   return (
     <div {...blockProps}>
-      <time dateTime={datetime} className="flex items-center font-semibold">
+      <time dateTime={datetime} className={getTimeClassName(attributes)}>
         <svg
           viewBox="0 0 4 4"
           aria-hidden="true"
-          className="mr-4 size-2 flex-none fill-primary animate-ping"
+          className="mr-4 size-1 flex-none fill-primary"
         >
           <circle r="2" cx="2" cy="2" />
         </svg>

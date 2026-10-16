@@ -5,12 +5,19 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.8.0] - 2026-10-16
+
+### Changed
+- `ufo-faq-item`: the question uses `text-primary` instead of `text-violet` (a color most themes don't define), in the editor and on the front end.
+- `ufo-time`: discreet default style — static `size-1` dot (no more `animate-ping`), `text-sm/6 text-slate-500` text. These default classes are dropped as soon as a text color or font size is chosen in the editor, so the `color` / `typography` supports still apply.
 
 ### Fixed
 - **README / Tailwind v4 integration**: the `h-*` safelist now lists every height offered by `ufo-grid` and `ufo-row` (`120` and `150` were missing, `9/10` matched no option), so those heights no longer disappear from the production CSS. `row-end-*` aligned on the 1-7 values the row inspector actually offers.
 - `ufo-grid`, `ufo-row`: "SM" border-radius label now reads 4px, the value of `rounded-sm` in Tailwind v4.
 - `ufo-buttons-group`: groups saved before 1.6.0 showed "This block contains unexpected or invalid content" in the editor (1.6.0 changed the saved markup without a deprecation). The 1.5.x markup and the pre-1.5.0 markup are now declared as deprecated versions and migrated on the next save. Checked on a copy of a live site: 68 groups in 33 posts, all valid again.
+
+### Notes
+- `ufo-faq-item` and `ufo-time` get a `deprecated` entry for the ≤ 1.7.0 markup: existing FAQ items and dates stay valid and switch to the new markup the next time the post is saved.
 
 ## [1.7.0] - 2026-10-14
 

@@ -18,7 +18,7 @@ export default function save({ attributes }) {
 
   return (
     <details {...blockProps}>
-      <summary className="flex w-full items-center justify-between px-6 py-6 md:text-lg text-base text-violet tracking-widest font-sans font-semibold cursor-pointer">
+      <summary className="flex w-full items-center justify-between px-6 py-6 md:text-lg text-base text-primary tracking-widest font-sans font-semibold cursor-pointer">
         <RichText.Content
           tagName="span"
           className="faq-question"
