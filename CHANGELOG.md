@@ -5,6 +5,15 @@ Tous les changements notables de ce projet seront documentés dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-10-16
+
+### Changed
+- `ufo-faq-item`: the question uses `text-primary` instead of `text-violet` (a color most themes don't define), in the editor and on the front end.
+- `ufo-time`: discreet default style — static `size-1` dot (no more `animate-ping`), `text-sm/6 text-slate-500` text. These default classes are dropped as soon as a text color or font size is chosen in the editor, so the `color` / `typography` supports still apply.
+
+### Notes
+- Both blocks get a `deprecated` entry for the ≤ 1.7.0 markup: existing FAQ items and dates stay valid and switch to the new markup the next time the post is saved.
+
 ## [1.7.0] - 2026-10-14
 
 ### Added
