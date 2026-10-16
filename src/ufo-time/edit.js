@@ -1,6 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, TextControl } from "@wordpress/components";
+import { getTimeClassName } from "./shared";
 import "./editor.css";
 
 export default function Edit({ attributes, setAttributes }) {
@@ -27,11 +28,14 @@ export default function Edit({ attributes, setAttributes }) {
       </InspectorControls>
 
       <div {...blockProps}>
-        <time dateTime={datetime} className="flex items-center font-semibold">
+        <time
+          dateTime={datetime}
+          className={getTimeClassName(attributes)}
+        >
           <svg
             viewBox="0 0 4 4"
             aria-hidden="true"
-            className="mr-4 size-2 flex-none fill-primary animate-ping"
+            className="mr-4 size-1 flex-none fill-primary"
           >
             <circle r="2" cx="2" cy="2" />
           </svg>

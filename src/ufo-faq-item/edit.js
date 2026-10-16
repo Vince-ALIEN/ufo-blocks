@@ -25,7 +25,7 @@ export default function Edit({ attributes, setAttributes }) {
       <div className="flex items-center justify-between px-6 py-6 border-b border-slate-100">
         <RichText
           tagName="span"
-          className="faq-question flex-1 md:text-lg text-base text-violet tracking-widest font-sans font-semibold"
+          className="faq-question flex-1 md:text-lg text-base text-primary tracking-widest font-sans font-semibold"
           value={question}
           onChange={(value) => setAttributes({ question: value })}
           placeholder={__("Entrez la question ici...", "ufo-blocks")}
@@ -34,7 +34,7 @@ export default function Edit({ attributes, setAttributes }) {
           type="button"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
-          className="ml-4 flex-shrink-0 text-violet cursor-pointer"
+          className="ml-4 flex-shrink-0 text-primary cursor-pointer"
         >
           {isOpen ? <Minus size={18} /> : <Plus size={18} />}
         </button>
