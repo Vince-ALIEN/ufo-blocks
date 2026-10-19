@@ -26,6 +26,7 @@ It pairs with your Tailwind CSS v4 theme: the plugin ships no CSS of its own, st
 | ufo Buttons | `ufo-blocks/ufo-buttons-group` | Button group with alignment control |
 | ufo FAQ | `ufo-blocks/ufo-faq` | FAQ accordion with Schema.org JSON-LD |
 | ufo FAQ Item | `ufo-blocks/ufo-faq-item` | Question/answer item (child of ufo FAQ) |
+| UFO Bento | `ufo-blocks/ufo-bento` | Latest posts, pages or projects in a bento grid (server-rendered) |
 | UFO Icon | `ufo-blocks/ufo-icon` | Lucide icon with alignment and theme color |
 | Logo Slider | `ufo-blocks/logo-slider` | Infinite CSS-only logo marquee (light, dark and card variants) |
 | UFO Time | `ufo-blocks/ufo-time` | Styled `<time>` element |
@@ -197,6 +198,7 @@ ufo-blocks/
 │   │   ├── inspector.js
 │   │   ├── edit.js / save.js
 │   │   └── editor.css / style.css
+│   ├── ufo-bento/            # Latest content in a bento grid
 │   ├── ufo-button/           # Button with Lucide icon
 │   ├── ufo-buttons-group/    # Button group
 │   ├── ufo-faq/              # FAQ accordion + Schema.org

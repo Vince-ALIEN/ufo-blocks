@@ -17,6 +17,17 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
     - Accessibility: the animation also pauses when a link receives keyboard focus; with `prefers-reduced-motion` the logos are shown as a static, wrapped row without the duplicate set.
     - `cursor-pointer` only on linked logos.
     - Editor: styles targeted a non-existent class (`wp-block-ufo-blocks-ufo-logo-slider`); logos can be reordered; actions use WordPress `Button` components.
+- Block `ufo-bento`: latest pages, posts or projects (`realisation` post type) in a bento grid, optionally filtered by category (`page_category`, `category`, `type_realisation`). Server-rendered; designed for 2 items (one row) or 5 (two rows), now also laid out correctly for 1, 3 and 4. Uses the theme's design tokens (`rounded-4xl`, `bg-primary`, `bg-secondary`, `bg-gradient-photo-card`, `text-cream`, `font-display`…). Block name and attributes unchanged from the version previously deployed outside this repository.
+  - Fixed compared to the version previously deployed outside this repository:
+    - Security: `postType` limited to `page`, `post` and `realisation` (existing and publicly viewable), `postsToShow` clamped to 1–5, password-protected content excluded from the query.
+    - Excerpts ended with a literal `&hellip;` (double escaping); block markup and shortcodes are stripped before trimming.
+    - Posts without a featured image showed a broken image (`/src/img/base.webp` from the theme); no image by default now, a theme can provide one with the `ufo_bento_default_image_url` filter.
+    - Editor: a global style set `height: 100%` on every image of the editor; the "Type de réalisation" category list never showed (`type-realisation` vs `realisation`); only existing content types are offered; `postsToShow` can be set.
+    - Accessibility: the duplicate "Voir plus" link is hidden from keyboard and screen readers (the title link stays), "Voir plus" is translatable, featured images are decorative (`alt=""`).
+    - `md:grid-rows-2` only with more than 2 items (an empty row was added below a 2-item grid).
+  - Removed compared to the version previously deployed outside this repository:
+    - `register-block.php` (never loaded): event-date meta box and creation of default terms on `admin_init`. The `enableCustomDate` attribute is kept for compatibility but no longer displays anything (no content had an event date).
+    - Empty `view.js` and SCSS boilerplate.
 
 ### Changed
 - `ufo-faq-item`: the question uses `text-primary` instead of `text-violet` (a color most themes don't define), in the editor and on the front end.

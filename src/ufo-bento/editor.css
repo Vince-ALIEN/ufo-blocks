@@ -1,0 +1,5 @@
+/* Aperçu ServerSideRender : les images de fond remplissent leur carte */
+.wp-block-ufo-blocks-ufo-bento img {
+    height: 100%;
+    max-width: 100%;
+}

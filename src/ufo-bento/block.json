@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ufo-blocks/ufo-bento",
+    "version": "1.0.0",
+    "title": "UFO Bento",
+    "category": "ufo-blocks",
+    "icon": "grid-view",
+    "description": "Affiche les derniers articles, pages ou réalisations dans une grille bento.",
+    "attributes": {
+        "postType": {
+            "type": "string",
+            "default": "page"
+        },
+        "pageCategory": {
+            "type": "number",
+            "default": 0
+        },
+        "postCategory": {
+            "type": "number",
+            "default": 0
+        },
+        "adminCategory": {
+            "type": "number",
+            "default": 0
+        },
+        "postsToShow": {
+            "type": "number",
+            "default": 5
+        },
+        "enableCustomDate": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ]
+    },
+    "textdomain": "ufo-blocks",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "render": "file:./render.php"
+}
