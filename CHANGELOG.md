@@ -7,6 +7,17 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.8.0] - 2026-10-16
 
+### Added
+- Block `ufo-logo-slider` (`ufo-blocks/logo-slider`): infinite CSS-only logo marquee with light, dark and card variants, adjustable speed, direction, logo height and spacing. Server-rendered (`save()` returns `null`). The block name keeps its historical `logo-slider` form (no `ufo-` prefix) so that pages already using it keep working.
+  - Fixed compared to the version previously deployed outside this repository:
+    - The front-end stylesheet was never built (`block.json` pointed to a missing `style-style.css`): the logos did not scroll. It is now imported from `index.js` and served as `style-index.css`.
+    - Logos are rendered with `wp_get_attachment_image()` from their attachment ID: current URL whatever the domain, `srcset`/`sizes`, dimensions. The stored URL is only a fallback for deleted media.
+    - Seamless loop: the copy now starts exactly at half the track width (missing gap after the last logo made the loop jump).
+    - Animation, keyframes and classes prefixed `ufo-ls-` to avoid clashing with a theme `marquee` utility.
+    - Accessibility: the animation also pauses when a link receives keyboard focus; with `prefers-reduced-motion` the logos are shown as a static, wrapped row without the duplicate set.
+    - `cursor-pointer` only on linked logos.
+    - Editor: styles targeted a non-existent class (`wp-block-ufo-blocks-ufo-logo-slider`); logos can be reordered; actions use WordPress `Button` components.
+
 ### Changed
 - `ufo-faq-item`: the question uses `text-primary` instead of `text-violet` (a color most themes don't define), in the editor and on the front end.
 - `ufo-time`: discreet default style — static `size-1` dot (no more `animate-ping`), `text-sm/6 text-slate-500` text. These default classes are dropped as soon as a text color or font size is chosen in the editor, so the `color` / `typography` supports still apply.
