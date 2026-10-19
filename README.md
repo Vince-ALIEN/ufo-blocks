@@ -90,10 +90,10 @@ Add the following directives to your theme's CSS entry point so Tailwind scans t
 @source inline("md:col-end-{1,2,3,4,5,6,7,8}");
 @source inline("row-span-{1,2,3,4,5,6}");
 @source inline("row-start-{1,2,3,4,5,6,7}");
-@source inline("row-end-{1,2,3,4,5,6,7,8}");
+@source inline("row-end-{1,2,3,4,5,6,7}");
 
-/* ufo-grid — fixed height */
-@source inline("h-{24,32,40,48,56,64,72,80,96,9/10}");
+/* ufo-grid & ufo-row — fixed height (also used by the "Hauteur minimale" setting) */
+@source inline("h-{24,32,40,48,56,64,72,80,96,120,150}");
 
 @source inline("gap-{0,1,2,3,4,5,6,7,8}");
 @source inline("md:grid-cols-{1,2,3,4,5,6}");
