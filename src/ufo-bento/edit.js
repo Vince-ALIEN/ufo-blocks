@@ -5,7 +5,7 @@ import {
     PanelColorSettings,
     useSettings,
 } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, SelectControl } from '@wordpress/components';
+import { Disabled, PanelBody, RangeControl, SelectControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import ServerSideRender from '@wordpress/server-side-render';
@@ -151,10 +151,14 @@ export default function Edit({ attributes, setAttributes }) {
                 </PanelColorSettings>
             </InspectorControls>
 
-            <ServerSideRender
-                block="ufo-blocks/ufo-bento"
-                attributes={attributes}
-            />
+            {/* Aperçu non interactif : les liens vers les contenus ne doivent pas
+                être suivis depuis l'éditeur (comme le bloc core Derniers articles) */}
+            <Disabled>
+                <ServerSideRender
+                    block="ufo-blocks/ufo-bento"
+                    attributes={attributes}
+                />
+            </Disabled>
         </div>
     );
 }
