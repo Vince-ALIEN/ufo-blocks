@@ -1,5 +1,10 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import {
+    useBlockProps,
+    InspectorControls,
+    PanelColorSettings,
+    useSettings,
+} from '@wordpress/block-editor';
 import { PanelBody, RangeControl, SelectControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
@@ -27,8 +32,37 @@ const POST_TYPES = {
     },
 };
 
+// Contraste avec le texte blanc des cartes (mêmes règles que render.php)
+function contrastWithWhite(color) {
+    let hex = String(color).replace('#', '');
+    if (hex.length === 3) {
+        hex = hex.replace(/./g, '$&$&');
+    }
+    if (!/^[0-9a-f]{6}$/i.test(hex)) {
+        return 0;
+    }
+
+    const luminance = [0.2126, 0.7152, 0.0722].reduce((sum, weight, i) => {
+        const channel = parseInt(hex.substr(i * 2, 2), 16) / 255;
+        return (
+            sum +
+            weight *
+                (channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4)
+        );
+    }, 0);
+
+    return 1.05 / (luminance + 0.05);
+}
+
 export default function Edit({ attributes, setAttributes }) {
-    const { postType, postsToShow } = attributes;
+    const { postType, postsToShow, backgroundColor } = attributes;
+
+    // Palette du thème, limitée aux couleurs lisibles sous du texte blanc (AA)
+    const [themePalette] = useSettings('color.palette.theme');
+    const backgroundColors = (themePalette ?? []).filter(
+        (color) => contrastWithWhite(color.color) >= 4.5
+    );
+    const currentBackground = backgroundColors.find((color) => color.slug === backgroundColor);
     const config = POST_TYPES[postType] ?? POST_TYPES.page;
     const currentCategory = attributes[config.attribute] ?? 0;
 
@@ -92,6 +126,29 @@ export default function Edit({ attributes, setAttributes }) {
                         max={5}
                     />
                 </PanelBody>
+
+                <PanelColorSettings
+                    title={__('Couleur', 'ufo-blocks')}
+                    disableCustomColors
+                    colorSettings={[
+                        {
+                            label: __('Fond et dégradé des cartes', 'ufo-blocks'),
+                            colors: backgroundColors,
+                            value: currentBackground?.color,
+                            clearable: false,
+                            onChange: (value) => {
+                                const color = backgroundColors.find((c) => c.color === value);
+                                if (color) {
+                                    setAttributes({ backgroundColor: color.slug });
+                                }
+                            },
+                        },
+                    ]}
+                >
+                    <p className="components-base-control__help">
+                        {__('Seules les couleurs du thème assez contrastées avec le texte blanc sont proposées.', 'ufo-blocks')}
+                    </p>
+                </PanelColorSettings>
             </InspectorControls>
 
             <ServerSideRender

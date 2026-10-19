@@ -24,9 +24,56 @@ $post_category  = absint($attributes['postCategory'] ?? 0);
 $admin_category = absint($attributes['adminCategory'] ?? 0);
 $posts_to_show  = min(5, max(1, absint($attributes['postsToShow'] ?? 5)));
 
+// Helper : couleurs de la palette theme.json assez sombres pour le texte blanc
+// (contraste ≥ 4.5:1, WCAG AA). Mêmes règles que edit.js.
+if (!function_exists('ufo_bento_contrast_with_white')) {
+    function ufo_bento_contrast_with_white($hex) {
+        $hex = ltrim((string) $hex, '#');
+        if (strlen($hex) === 3) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+        if (!preg_match('/^[0-9a-f]{6}$/i', $hex)) {
+            return 0;
+        }
+
+        $luminance = 0;
+        foreach (array(0.2126, 0.7152, 0.0722) as $i => $weight) {
+            $channel = hexdec(substr($hex, $i * 2, 2)) / 255;
+            $channel = $channel <= 0.03928 ? $channel / 12.92 : pow(($channel + 0.055) / 1.055, 2.4);
+            $luminance += $weight * $channel;
+        }
+
+        return 1.05 / ($luminance + 0.05);
+    }
+}
+
+if (!function_exists('ufo_bento_background_slugs')) {
+    function ufo_bento_background_slugs() {
+        $palette = wp_get_global_settings(array('color', 'palette', 'theme'));
+        $slugs = array();
+        foreach ((array) $palette as $color) {
+            if (isset($color['slug'], $color['color']) && ufo_bento_contrast_with_white($color['color']) >= 4.5) {
+                $slugs[] = $color['slug'];
+            }
+        }
+        return $slugs;
+    }
+}
+
+// Couleur de fond et du dégradé des cartes : un slug de la palette theme.json
+$background_slugs = ufo_bento_background_slugs();
+$background_color = isset($attributes['backgroundColor']) ? (string) $attributes['backgroundColor'] : 'tertiary';
+if (!in_array($background_color, $background_slugs, true)) {
+    $background_color = in_array('tertiary', $background_slugs, true) ? 'tertiary' : ($background_slugs[0] ?? '');
+}
+$background_value = $background_color
+    ? 'var(--wp--preset--color--' . $background_color . ')'
+    : '#000';
+
 // Configuration des attributs du wrapper
 $wrapper_attributes = get_block_wrapper_attributes(array(
     'class' => 'ufo-bento-container',
+    'style' => '--ufo-bento-color: ' . $background_value . ';',
 ));
 
 // Helper : taxonomie de catégories selon le type de contenu
@@ -213,10 +260,10 @@ $items = array_map(function ($post, $index) use ($total, $taxonomy) {
     // Carte entièrement cliquable via le lien du titre étendu (span absolute
     // inset-0) : un seul lien par carte, nommé par le titre.
     return sprintf(
-        '<article class="group relative isolate flex min-h-120 flex-col justify-end overflow-hidden rounded-lg bg-tertiary p-10 pt-4 text-white has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-primary %s %s">
+        '<article class="group relative isolate flex min-h-120 flex-col justify-end overflow-hidden rounded-lg bg-(--ufo-bento-color) p-10 pt-4 text-white has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-primary %s %s">
             %s
-            <div class="absolute inset-0 -z-10 bg-linear-to-t from-tertiary via-tertiary/50" aria-hidden="true"></div>
-            <div class="absolute inset-0 -z-10 rounded-[inherit] ring-1 ring-inset ring-tertiary/10" aria-hidden="true"></div>
+            <div class="absolute inset-0 -z-10 bg-linear-to-t from-(--ufo-bento-color) via-(--ufo-bento-color)/50" aria-hidden="true"></div>
+            <div class="absolute inset-0 -z-10 rounded-[inherit] ring-1 ring-inset ring-(--ufo-bento-color)/10" aria-hidden="true"></div>
             %s
             <h2 class="not-prose text-xl/7 font-sans font-semibold text-white line-clamp-2">
                 <a href="%s" class="not-prose no-underline text-white focus-visible:outline-none group-hover:underline" rel="bookmark">

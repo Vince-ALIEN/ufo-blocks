@@ -28,6 +28,10 @@
             "type": "number",
             "default": 5
         },
+        "backgroundColor": {
+            "type": "string",
+            "default": "tertiary"
+        },
         "enableCustomDate": {
             "type": "boolean",
             "default": false
