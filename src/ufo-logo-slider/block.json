@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ufo-blocks/logo-slider",
+  "version": "1.1.0",
+  "title": "Logo Slider",
+  "category": "ufo-blocks",
+  "icon": "slides",
+  "description": "Défilement automatique de logos clients/partenaires en CSS pur.",
+  "keywords": ["logo", "slider", "marquee", "clients", "partenaires"],
+  "textdomain": "ufo-blocks",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": {
+      "padding": true,
+      "margin": ["top", "bottom"]
+    }
+  },
+  "attributes": {
+    "logos": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id":     { "type": "number" },
+          "url":    { "type": "string" },
+          "alt":    { "type": "string" },
+          "link":   { "type": "string" },
+          "width":  { "type": "number" },
+          "height": { "type": "number" }
+        }
+      }
+    },
+    "speed": {
+      "type": "number",
+      "default": 40
+    },
+    "direction": {
+      "type": "string",
+      "default": "left"
+    },
+    "variant": {
+      "type": "string",
+      "default": "light"
+    },
+    "logoHeight": {
+      "type": "number",
+      "default": 40
+    },
+    "gap": {
+      "type": "number",
+      "default": 64
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "default": true
+    },
+    "grayscale": {
+      "type": "boolean",
+      "default": true
+    },
+    "showFade": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle":  "file:./index.css",
+  "style":        "file:./style-index.css",
+  "render":       "file:./render.php"
+}

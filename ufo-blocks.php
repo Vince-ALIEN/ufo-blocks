@@ -45,6 +45,7 @@ function create_block_ufo_blocks_block_init()
     register_block_type(__DIR__ . "/build/ufo-title");
     register_block_type(__DIR__ . "/build/ufo-icon");
     register_block_type(__DIR__ . "/build/ufo-time");
+    register_block_type(__DIR__ . "/build/ufo-logo-slider");
 }
 add_action("init", "create_block_ufo_blocks_block_init");
 

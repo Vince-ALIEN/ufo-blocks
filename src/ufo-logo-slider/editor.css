@@ -1,0 +1,116 @@
+/* =========================================================================
+   ufo-logo-slider — Styles d'édition Gutenberg
+   ========================================================================= */
+
+/* Bloc dans l'éditeur */
+.editor-styles-wrapper .wp-block-ufo-blocks-logo-slider {
+    position: relative;
+    padding: 8px;
+    border: 1px dashed var(--ufo-color-row-border, rgba(0, 0, 0, 0.18));
+    border-radius: var(--ufo-radius, 8px);
+    background-color: var(--ufo-color-row-bg, rgba(0, 0, 0, 0.015));
+    transition: border-color var(--ufo-transition, 120ms ease-in-out),
+                background-color var(--ufo-transition, 120ms ease-in-out);
+}
+
+.editor-styles-wrapper .wp-block-ufo-blocks-logo-slider:hover {
+    border-color: var(--ufo-color-row-border-hover, rgba(124, 58, 237, 0.55));
+    background-color: rgba(124, 58, 237, 0.04);
+}
+
+.editor-styles-wrapper .wp-block-ufo-blocks-logo-slider.is-selected {
+    border-style: solid;
+    border-color: var(--ufo-color-accent-strong, #7c3aed);
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.15);
+}
+
+/* ── Liste des logos dans l'InspectorControls ───────────────────────────── */
+
+.ufo-ls-count {
+    font-size: 12px;
+    color: #757575;
+    margin-bottom: 8px;
+}
+
+.ufo-ls-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.ufo-ls-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+.ufo-ls-preview {
+    flex-shrink: 0;
+    width: 48px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 3px;
+}
+
+.ufo-ls-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.ufo-ls-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.ufo-ls-name {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ufo-ls-link-btn.components-button {
+    height: auto;
+    margin-top: 4px;
+    padding: 0;
+    font-size: 11px;
+}
+
+.ufo-ls-actions {
+    display: flex;
+    flex-shrink: 0;
+}
+
+/* ── Notice aperçu statique ─────────────────────────────────────────────── */
+
+.ufo-ls-notice {
+    font-size: 11px;
+    color: #757575;
+    text-align: center;
+    padding: 4px 0 8px;
+    font-style: italic;
+}
+
+@media (forced-colors: active) {
+    .editor-styles-wrapper .wp-block-ufo-blocks-logo-slider {
+        border-color: CanvasText;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .editor-styles-wrapper .wp-block-ufo-blocks-logo-slider {
+        transition: none;
+    }
+}

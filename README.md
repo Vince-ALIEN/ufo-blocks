@@ -27,6 +27,7 @@ It pairs with your Tailwind CSS v4 theme: the plugin ships no CSS of its own, st
 | ufo FAQ | `ufo-blocks/ufo-faq` | FAQ accordion with Schema.org JSON-LD |
 | ufo FAQ Item | `ufo-blocks/ufo-faq-item` | Question/answer item (child of ufo FAQ) |
 | UFO Icon | `ufo-blocks/ufo-icon` | Lucide icon with alignment and theme color |
+| Logo Slider | `ufo-blocks/logo-slider` | Infinite CSS-only logo marquee (light, dark and card variants) |
 | UFO Time | `ufo-blocks/ufo-time` | Styled `<time>` element |
 | ufo Title | `ufo-blocks/ufo-title` | Title with icon and rounded background |
 
@@ -201,6 +202,7 @@ ufo-blocks/
 │   ├── ufo-faq/              # FAQ accordion + Schema.org
 │   ├── ufo-faq-item/         # FAQ item
 │   ├── ufo-icon/             # Lucide icon
+│   ├── ufo-logo-slider/      # Logo marquee (block name: logo-slider)
 │   ├── ufo-time/             # <time> element
 │   ├── ufo-title/            # Title with icon
 │   └── icons.js

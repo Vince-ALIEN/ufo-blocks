@@ -1,0 +1,56 @@
+/**
+ * UFO Blocks – Logo Slider
+ * CSS custom uniquement pour ce qui ne peut pas être fait avec Tailwind :
+ * keyframes de l'animation, pause, fondu latéral.
+ * Noms préfixés ufo-ls- pour ne pas entrer en collision avec un
+ * utilitaire « marquee » défini par le thème.
+ */
+
+@keyframes ufo-ls-marquee {
+	from { transform: translateX(0); }
+	to   { transform: translateX(-50%); }
+}
+
+.ufo-ls-track {
+	width: max-content;
+	gap: var(--ufo-ls-gap, 64px);
+	animation: ufo-ls-marquee var(--ufo-ls-speed, 40s) linear infinite;
+	animation-direction: var(--ufo-ls-direction, normal);
+}
+
+/* La copie doit suivre le dernier logo avec le même écart, sinon la boucle saute */
+.ufo-ls-track > .ufo-ls-item:last-child {
+	margin-right: var(--ufo-ls-gap, 64px);
+}
+
+/* Pause au survol et quand un lien reçoit le focus clavier */
+.ufo-ls-pausable:hover .ufo-ls-track,
+.ufo-ls-pausable:focus-within .ufo-ls-track {
+	animation-play-state: paused;
+}
+
+/* Fondu latéral (mask-image difficile en Tailwind arbitraire) */
+.ufo-ls-fade {
+	-webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+	mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+/* Mouvement réduit : grille statique, sans la copie */
+@media (prefers-reduced-motion: reduce) {
+	.ufo-ls-track {
+		width: auto;
+		flex-wrap: wrap;
+		justify-content: center;
+		row-gap: calc(var(--ufo-ls-gap, 64px) / 2);
+		animation: none;
+	}
+
+	.ufo-ls-track > .ufo-ls-item[aria-hidden="true"] {
+		display: none;
+	}
+
+	.ufo-ls-fade {
+		-webkit-mask-image: none;
+		mask-image: none;
+	}
+}
