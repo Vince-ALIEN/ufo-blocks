@@ -43,7 +43,7 @@ if (!function_exists('ufo_bento_taxonomy')) {
     }
 }
 
-// Helper : récupérer les catégories d'un post
+// Helper : catégories d'un post (texte simple : le seul lien de la carte est le titre)
 if (!function_exists('ufo_bento_get_categories')) {
     function ufo_bento_get_categories($post_id, $taxonomy) {
         if (!$taxonomy) {
@@ -57,13 +57,8 @@ if (!function_exists('ufo_bento_get_categories')) {
 
         $html = '';
         foreach ($terms as $term) {
-            $link = get_term_link($term);
-            if (is_wp_error($link)) {
-                continue;
-            }
             $html .= sprintf(
-                '<a href="%s" class="not-prose no-underline text-xs/4 font-semibold text-white bg-primary rounded-full px-2 py-px hover:text-gray-100 transition">%s</a> ',
-                esc_url($link),
+                '<span class="text-xs/4 font-semibold text-white bg-primary rounded-full px-2 py-px">%s</span> ',
                 esc_html($term->name)
             );
         }
@@ -88,14 +83,13 @@ if (!function_exists('ufo_bento_col_span')) {
 // Helper : classes d'arrondi des coins extérieurs de la grille
 if (!function_exists('ufo_bento_corner_classes')) {
     function ufo_bento_corner_classes($index, $total) {
-        // [fond, contenu] — le contenu est arrondi d'1px de plus que le fond
         $corner = array(
-            'top'    => array('max-md:rounded-t-4xl', 'max-md:rounded-t-[calc(2rem+1px)]'),
-            'bottom' => array('max-md:rounded-b-4xl', 'max-md:rounded-b-[calc(2rem+1px)]'),
-            'tl'     => array('md:rounded-tl-4xl', 'md:rounded-tl-[calc(2rem+1px)]'),
-            'tr'     => array('md:rounded-tr-4xl', 'md:rounded-tr-[calc(2rem+1px)]'),
-            'bl'     => array('md:rounded-bl-4xl', 'md:rounded-bl-[calc(2rem+1px)]'),
-            'br'     => array('md:rounded-br-4xl', 'md:rounded-br-[calc(2rem+1px)]'),
+            'top'    => 'max-md:rounded-t-4xl',
+            'bottom' => 'max-md:rounded-b-4xl',
+            'tl'     => 'md:rounded-tl-4xl',
+            'tr'     => 'md:rounded-tr-4xl',
+            'bl'     => 'md:rounded-bl-4xl',
+            'br'     => 'md:rounded-br-4xl',
         );
 
         $last_of_first_row = min(1, $total - 1);
@@ -117,14 +111,9 @@ if (!function_exists('ufo_bento_corner_classes')) {
             $keys[] = 'br';
         }
 
-        $bg = '';
-        $content = '';
-        foreach ($keys as $key) {
-            $bg      .= ' ' . $corner[$key][0];
-            $content .= ' ' . $corner[$key][1];
-        }
-
-        return array('bg' => $bg, 'content' => $content);
+        return implode(' ', array_map(function ($key) use ($corner) {
+            return $corner[$key];
+        }, $keys));
     }
 }
 
@@ -132,7 +121,7 @@ if (!function_exists('ufo_bento_corner_classes')) {
 // sauf si un thème en fournit une via le filtre `ufo_bento_default_image_url`)
 if (!function_exists('ufo_bento_get_image')) {
     function ufo_bento_get_image($post_id, $is_above_fold, $col_span) {
-        $classes = 'not-prose absolute inset-0 h-full w-full object-cover';
+        $classes = 'not-prose absolute inset-0 -z-10 h-full w-full object-cover';
 
         if ($col_span === 'md:col-span-2') {
             $sizes = '(max-width: 767px) 100vw, (max-width: 1280px) 33vw, 313px';
@@ -218,46 +207,42 @@ $items = array_map(function ($post, $index) use ($total, $taxonomy) {
     );
 
     $categories_block = $categories
-        ? sprintf('<div class="not-prose mb-2">%s</div>', $categories)
+        ? sprintf('<div class="not-prose mb-2 flex flex-wrap gap-1">%s</div>', $categories)
         : '';
 
+    // Carte entièrement cliquable via le lien du titre étendu (span absolute
+    // inset-0) : un seul lien par carte, nommé par le titre.
     return sprintf(
-        '<div class="group relative min-h-120 %s">
-            <div class="absolute inset-0 rounded-lg %s"></div>
-            <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]%s">
-                %s
-                <div class="absolute inset-0 bg-gradient-photo-card"></div>
-                <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-foreground/10"></div>
-                <div class="relative mt-auto p-10 pt-4">
+        '<article class="group relative isolate flex min-h-120 flex-col justify-end overflow-hidden rounded-lg bg-tertiary p-10 pt-4 text-white has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-primary %s %s">
+            %s
+            <div class="absolute inset-0 -z-10 bg-linear-to-t from-tertiary via-tertiary/50" aria-hidden="true"></div>
+            <div class="absolute inset-0 -z-10 rounded-[inherit] ring-1 ring-inset ring-tertiary/10" aria-hidden="true"></div>
+            %s
+            <h2 class="not-prose text-xl/7 font-sans font-semibold text-white line-clamp-2">
+                <a href="%s" class="not-prose no-underline text-white focus-visible:outline-none group-hover:underline" rel="bookmark">
+                    <span class="absolute inset-0" aria-hidden="true"></span>
                     %s
-                    <h2 class="text-xl text-white group-hover:text-cream font-display font-medium leading-tight tracking-heading line-clamp-2">
-                        <a href="%s" class="not-prose no-underline" rel="bookmark">%s</a>
-                    </h2>
-                    <p class="not-prose mt-2 max-w-lg text-sm/6 text-white">%s</p>
-                    <a href="%s" class="not-prose no-underline mt-4 text-sm font-semibold text-white transition duration-300 hover:text-cream group-hover:text-cream inline-flex items-center gap-2" tabindex="-1" aria-hidden="true">
-                        %s
-                        <span class="relative w-6 h-6 rounded-full inline-flex items-center justify-center bg-secondary group-hover:translate-x-2 transition duration-200 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white" aria-hidden="true" focusable="false">
-                                <path d="M5 12h14"></path>
-                                <path d="m12 5 7 7-7 7"></path>
-                            </svg>
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="pointer-events-none absolute inset-0 rounded-lg %s"></div>
-        </div>',
+                </a>
+            </h2>
+            <p class="not-prose mt-2 mb-0 px-0 max-w-lg line-clamp-2 text-sm/6 text-white">%s</p>
+            <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white" aria-hidden="true">
+                %s
+                <span class="relative w-6 h-6 rounded-full inline-flex items-center justify-center bg-secondary transition duration-200 ease-in-out motion-safe:group-hover:translate-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white" focusable="false">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </span>
+            </span>
+        </article>',
         esc_attr($col_span),
-        esc_attr($corners['bg']),
-        esc_attr($corners['content']),
+        esc_attr($corners),
         $image,
         $categories_block,
         esc_url(get_permalink($post_id)),
         esc_html(get_the_title($post_id)),
         esc_html(html_entity_decode($excerpt, ENT_QUOTES, get_bloginfo('charset'))),
-        esc_url(get_permalink($post_id)),
-        esc_html__('Voir plus', 'ufo-blocks'),
-        esc_attr($corners['bg'])
+        esc_html__('Voir plus', 'ufo-blocks')
     );
 }, $bento_posts, array_keys($bento_posts));
 
