@@ -1,5 +1,24 @@
 # UFO Blocks
 
+> [!IMPORTANT]
+> **This repository is no longer maintained.** Ufo Blocks 1.8.0 is its last version. The plugin continues as **[ufo-tools-blocks](https://github.com/Vince-ALIEN/ufo-tools-blocks)**, and three of its blocks moved to their own plugins:
+>
+> | Block | New plugin |
+> |---|---|
+> | ufo Grid, ufo Row, UFO Button, ufo Buttons, ufo FAQ, ufo FAQ Item, UFO Icon, ufo Title | [ufo-tools-blocks](https://github.com/Vince-ALIEN/ufo-tools-blocks/releases/latest) |
+> | UFO Bento (`ufo-blocks/ufo-bento`) | [ufo-tools-bento](https://github.com/Vince-ALIEN/ufo-tools-bento/releases/latest) |
+> | UFO Time (`ufo-blocks/ufo-time`) | [ufo-tools-time](https://github.com/Vince-ALIEN/ufo-tools-time/releases/latest) |
+> | Logo Slider (`ufo-blocks/logo-slider`) | [ufo-tools-logo-slider](https://github.com/Vince-ALIEN/ufo-tools-logo-slider/releases/latest) |
+>
+> **Migrating a site.** Sites running Ufo Blocks are not offered the new plugins as an update; install them from their release zip:
+>
+> 1. Install and activate the plugins for the blocks the site uses among Bento, Time and Logo Slider.
+> 2. Install and activate `ufo-tools-blocks`: activation deactivates Ufo Blocks.
+> 3. Delete Ufo Blocks.
+> 4. In the theme, point the Tailwind `@source` directives to the new plugin folders, e.g. `@source "../../../plugins/ufo-tools-blocks/src/**/*.{js,php}";`.
+>
+> Block names (`ufo-blocks/*`), attributes and markup are unchanged: existing content stays valid. The new plugins then update themselves from their GitHub releases.
+
 **A WordPress Gutenberg plugin providing a powerful CSS Grid layout system and content blocks built with Tailwind CSS v4.**
 
 No page builder. No bloat. Just clean, semantic markup with full CSS Grid control — directly inside the block editor.
